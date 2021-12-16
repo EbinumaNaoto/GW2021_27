@@ -22,6 +22,19 @@ namespace GourmetSearchApplication {
         //プロパティ
         public MainWindow() {
             InitializeComponent();
+
+            // Manually alter window height and width
+            this.SizeToContent = SizeToContent.Manual;
+
+            // Automatically resize width relative to content
+            this.SizeToContent = SizeToContent.Width;
+
+            // Automatically resize height relative to content
+            this.SizeToContent = SizeToContent.Height;
+
+            // Automatically resize height and width relative to content
+            this.SizeToContent = SizeToContent.WidthAndHeight;
+
             Uri uri = new Uri("/loginPage.xaml", UriKind.Relative);
             frame.Source = uri;
         }

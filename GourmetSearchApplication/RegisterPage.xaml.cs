@@ -21,5 +21,18 @@ namespace GourmetSearchApplication {
         public RegisterPage() {
             InitializeComponent();
         }
+
+        //戻るボタン
+        private void ReturnButton_Click(object sender, RoutedEventArgs e) {
+            if (ScreenInformation.loginInformation) {
+                //ログイン済みの場合の処理
+                NavigationService.Navigate(ScreenInformation.searchPage);
+                ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.検索;
+            } else {
+                //まだログインしていない場合の処理
+                NavigationService.Navigate(ScreenInformation.loginPage);
+                ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.ログイン;
+            }
+        }
     }
 }

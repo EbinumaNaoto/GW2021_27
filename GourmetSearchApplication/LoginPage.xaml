@@ -16,10 +16,10 @@
             <!--<TextBox x:Name="PasswordText" FontSize="30" Margin="10,20,10,0" local:Placeholder.PlaceHolderText="Password"/>-->
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Width="250">
-            <Button x:Name="LoginButton" FontSize="30" Content="Log in" Margin="70,20,70,0" Foreground="White"  Background="OrangeRed" Click="LoginButton_Click"/>
+            <Button x:Name="LoginButton" FontSize="30" Content="Log in" Margin="70,20,69.6,20" Foreground="White"  Background="OrangeRed" Click="LoginButton_Click"/>
         </StackPanel>
         <StackPanel>
-            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,0" Foreground="White" Background="OrangeRed" Click="SignupButton_Click"/>
+            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,20" Foreground="White" Background="OrangeRed" Click="SignupButton_Click"/>
         </StackPanel>
     </DockPanel>
 </Page>

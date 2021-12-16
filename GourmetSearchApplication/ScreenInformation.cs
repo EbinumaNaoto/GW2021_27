@@ -13,13 +13,15 @@ namespace GourmetSearchApplication {
         public static LoginPage loginPage = new LoginPage(); //ログインページ
         public static SearchPage searchPage = new SearchPage(); //検索ページ
 
-        public static DisplayScreen displayScreen = DisplayScreen.ログイン; //前に表示されていた画面の情報を保持する
+        public static DisplayScreen displayScreen = DisplayScreen.ログイン; //現在表示されている画面の情報を保持する
+
+        public static bool loginInformation = false; //ログイン情報(true:ログイン済み false:ログアウト済み)
 
         //画面情報
         public enum DisplayScreen {
             検索,
             ログイン,
-            会員登録
+            会員登録,
         }
     }
 }
