@@ -1,0 +1,25 @@
+﻿<Page x:Class="GourmetSearchApplication.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GourmetSearchApplication"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="500"
+      Background="White"
+      Title="ログイン画面">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <TextBlock Text="グルメアプリケーション" FontSize="40" Margin="75,10,75,0" Foreground="OrangeRed" FontWeight="Bold"/>
+            <TextBox x:Name="UserIdText" FontSize="30" Margin="10,20,10,0" local:Placeholder.PlaceHolderText="UserID(会員ID)"/>
+            <PasswordBox x:Name="PasswordBox" FontSize="30" Margin="10,20,10,0" PasswordChar="*" MaxLength="14"/>
+            <!--<TextBox x:Name="PasswordText" FontSize="30" Margin="10,20,10,0" local:Placeholder.PlaceHolderText="Password"/>-->
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Left" Width="250">
+            <Button x:Name="LoginButton" FontSize="30" Content="Log in" Margin="70,20,70,0" Foreground="White"  Background="OrangeRed" Click="LoginButton_Click"/>
+        </StackPanel>
+        <StackPanel>
+            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,0" Foreground="White" Background="OrangeRed" Click="SignupButton_Click"/>
+        </StackPanel>
+    </DockPanel>
+</Page>
