@@ -19,19 +19,19 @@
         </StackPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
             <TextBox x:Name="KeywordTextBox" Width="1300" FontSize="30" Margin="30,0,20,0" local:Placeholder.PlaceHolderText="キーワードを入力してください 例:店舗名、ジャンル、住所、駅名etc"/>
-            <Button x:Name="SearchButton" Content="検索" FontSize="30" Width="130"  Foreground="White"  Background="OrangeRed"/>
+            <Button x:Name="SearchButton" Content="検索" FontSize="30" Width="130"  Foreground="White"  Background="OrangeRed" Click="SearchButton_Click"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
             <TextBlock Text="検索結果" FontSize="20" Margin="20,10,10,10"/>
             <TextBlock Text="お気に入り店舗一覧" FontSize="20" Margin="930,10,10,10"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left">
-            <DataGrid x:Name="ResultDataGrid" Height="560" Width="1000" Margin="20,0,20,20" Background="OrangeRed" AutoGenerateColumns="False"/>
+            <DataGrid x:Name="ResultDataGrid" Height="560" Width="1000" Margin="20,0,20,20" Background="OrangeRed"/>
         </StackPanel>
         <StackPanel>
-            <DataGrid x:Name="FavoriteStoreNameDataGrid" Height="255" Width="440" Margin="0,0,20,0" Background="OrangeRed" AutoGenerateColumns="False"/>
+            <DataGrid x:Name="FavoriteStoreNameDataGrid" Height="255" Width="440" Margin="0,0,20,0" Background="OrangeRed"/>
             <TextBlock Text="近くのおすすめ店舗一覧" FontSize="20" Margin="0,10,10,10"/>
-            <DataGrid x:Name="NearbyShopDataGrid" Height="255" Width="440" Margin="0,0,20,20" Background="OrangeRed" AutoGenerateColumns="False"/>
+            <DataGrid x:Name="NearbyShopDataGrid" Height="255" Width="440" Margin="0,0,20,20" Background="OrangeRed"/>
         </StackPanel>
     </DockPanel>
 </Page>
