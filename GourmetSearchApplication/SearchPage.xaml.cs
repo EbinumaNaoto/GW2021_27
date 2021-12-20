@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using System.Drawing;
+using System.IO;
 
 namespace GourmetSearchApplication {
     /// <summary>
@@ -22,7 +24,7 @@ namespace GourmetSearchApplication {
     /// </summary>
     public partial class SearchPage : Page {
 
-        ObservableCollection<StoreInformation> items = null;
+        ObservableCollection<StoreInformation> items { get; set; } = null;
 
         public SearchPage() {
             InitializeComponent();
@@ -49,6 +51,10 @@ namespace GourmetSearchApplication {
 
         //検索ボタン
         private void SearchButton_Click(object sender, RoutedEventArgs e) {
+            //検索textに何もない場合はreturnを返す
+            if (string.IsNullOrWhiteSpace(KeywordTextBox.Text))
+                return;
+
             //店舗情報をxml形式で取り出す
             using (var wc = new WebClient()) {
                 wc.Headers.Add("Content-type", "charset=UTF-8");
@@ -58,19 +64,25 @@ namespace GourmetSearchApplication {
 
                 var xdoc = XDocument.Load(stream);
 
+                //apiから取得したデータをObservableClooectionに格納する
                 items = new ObservableCollection<StoreInformation>(xdoc.Root.Descendants("{http://webservice.recruit.co.jp/HotPepper/}shop").Select(x => new StoreInformation {
-                    Name = x.Element("{http://webservice.recruit.co.jp/HotPepper/}name").Value,
-                    Information = x.Element("{http://webservice.recruit.co.jp/HotPepper/}catch").Value,
-                    Url = x.Element("{http://webservice.recruit.co.jp/HotPepper/}urls").Element("{http://webservice.recruit.co.jp/HotPepper/}pc").Value,
-                    Genre = x.Element("{http://webservice.recruit.co.jp/HotPepper/}genre").Element("{http://webservice.recruit.co.jp/HotPepper/}name").Value,
-                    Address = x.Element("{http://webservice.recruit.co.jp/HotPepper/}address").Value,
-                    Station = x.Element("{http://webservice.recruit.co.jp/HotPepper/}station_name").Value,
-                    Time = x.Element("{http://webservice.recruit.co.jp/HotPepper/}open").Value,
                     Photo = x.Element("{http://webservice.recruit.co.jp/HotPepper/}logo_image").Value,
+                    Name = x.Element("{http://webservice.recruit.co.jp/HotPepper/}name").Value,
+                    Genre = x.Element("{http://webservice.recruit.co.jp/HotPepper/}genre").Element("{http://webservice.recruit.co.jp/HotPepper/}name").Value,
+                    Information = x.Element("{http://webservice.recruit.co.jp/HotPepper/}catch").Value,
+                    Time = x.Element("{http://webservice.recruit.co.jp/HotPepper/}open").Value,
+                    Address = x.Element("{http://webservice.recruit.co.jp/HotPepper/}address").Value,
+                    Station = x.Element("{http://webservice.recruit.co.jp/HotPepper/}station_name").Value+"駅",
+                    Url = x.Element("{http://webservice.recruit.co.jp/HotPepper/}urls").Element("{http://webservice.recruit.co.jp/HotPepper/}pc").Value,
                 }).ToList());
 
                 ResultDataGrid.ItemsSource = items;
             };
+        }
+
+        //検索テキストでEnterキーが押された時のイベントハンドラー
+        private void KeywordTextBox_KeyDown(object sender, KeyEventArgs e) {
+            SearchButton_Click(sender,e);
         }
     }
 }
