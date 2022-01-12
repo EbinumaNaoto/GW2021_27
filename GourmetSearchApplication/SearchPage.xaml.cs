@@ -32,7 +32,7 @@ namespace GourmetSearchApplication {
 
         //ログアウトボタン
         private void LogoutButton_Click(object sender, RoutedEventArgs e) {
-            ScreenInformation.loginInformation = false; //ログアウト情報を持たせる
+            LoginInformation.loginInformation = false; //ログアウト情報を持たせる
             NavigationService.Navigate(ScreenInformation.loginPage);
             ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.ログイン;
         }
@@ -83,6 +83,11 @@ namespace GourmetSearchApplication {
         //検索テキストでEnterキーが押された時のイベントハンドラー
         private void KeywordTextBox_KeyDown(object sender, KeyEventArgs e) {
             SearchButton_Click(sender,e);
+        }
+
+        //お気に入り登録ボタン
+        private void FavoriteButton_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }

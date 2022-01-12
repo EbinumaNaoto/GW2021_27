@@ -27,7 +27,7 @@ namespace GourmetSearchApplication {
             //ログイン情報が一致しているかの処理
 
             //ログイン成功時の処理
-            ScreenInformation.loginInformation = true; //ログイン情報を持たせる
+            LoginInformation.loginInformation = true; //ログイン情報を持たせる
 
             NavigationService.Navigate(ScreenInformation.searchPage);
             ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.検索;

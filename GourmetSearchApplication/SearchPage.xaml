@@ -12,7 +12,7 @@
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="LogoutButton" Content="ログアウト" Width="100" Height="30" Margin="0,20,20,20" Foreground="White"  Background="OrangeRed" Click="LogoutButton_Click"/>
             <Button x:Name="ChangeButton" Content="変更" Width="100" Height="30" Margin="0,20,20,20" Foreground="White"  Background="OrangeRed" Click="ChangeButton_Click"/>
-            <Button x:Name="FavoriteButton" Content="お気に入り登録" Width="100" Height="30" Margin="0,20,40,20" Foreground="White"  Background="OrangeRed"/>
+            <Button x:Name="FavoriteButton" Content="お気に入り登録" Width="100" Height="30" Margin="0,20,40,20" Foreground="White"  Background="OrangeRed" Click="FavoriteButton_Click"/>
             <Border BorderThickness="5" BorderBrush="OrangeRed"  Margin="0,10,20,10">
                 <TextBlock x:Name="UserNameTextBlock" Text="グルメ太郎様👤" FontSize="30" Height="40"/>
             </Border>

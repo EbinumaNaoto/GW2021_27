@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GourmetSearchApplication.Models;
 
 namespace GourmetSearchApplication {
     /// <summary>
@@ -95,7 +96,7 @@ namespace GourmetSearchApplication {
 
         //戻るボタン
         private void ReturnButton_Click(object sender, RoutedEventArgs e) {
-            if (ScreenInformation.loginInformation) {
+            if (LoginInformation.loginInformation) {
                 //ログイン済みの場合の処理
                 NavigationService.Navigate(ScreenInformation.searchPage);
                 ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.検索;
@@ -109,11 +110,10 @@ namespace GourmetSearchApplication {
         //登録ボタン
         private void RegisterButton_Click(object sender, RoutedEventArgs e) {
             //DBにユーザー情報を登録する処理
-
+            
             //画面切り替え処理
-            if (ScreenInformation.loginInformation) {
+            if (LoginInformation.loginInformation) {
                 //ログイン済みの場合の処理
-                //ログイン中のユーザー情報を表示する
 
                 //画面表示
                 NavigationService.Navigate(ScreenInformation.searchPage);

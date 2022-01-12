@@ -15,10 +15,6 @@ namespace GourmetSearchApplication {
 
         public static DisplayScreen displayScreen = DisplayScreen.ログイン; //現在表示されている画面の情報を保持する
 
-        //ユーザーサイドのクラスを作って、そのクラスにログイン情報を持たせる
-        //一時的に画面情報においている
-        public static bool loginInformation = false; //ログイン情報(true:ログイン済み false:ログアウト済み)
-
         //画面情報
         public enum DisplayScreen {
             検索,
