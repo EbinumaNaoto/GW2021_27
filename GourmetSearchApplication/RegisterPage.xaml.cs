@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GourmetSearchApplication.Models;
 
 namespace GourmetSearchApplication {
     /// <summary>
@@ -96,22 +96,59 @@ namespace GourmetSearchApplication {
 
         //戻るボタン
         private void ReturnButton_Click(object sender, RoutedEventArgs e) {
-            if (LoginInformation.loginInformation) {
-                //ログイン済みの場合の処理
-                NavigationService.Navigate(ScreenInformation.searchPage);
-                ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.検索;
-            } else {
-                //まだログインしていない場合の処理
-                NavigationService.Navigate(ScreenInformation.loginPage);
-                ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.ログイン;
-            }
+            changedScreen();
         }
 
         //登録ボタン
         private void RegisterButton_Click(object sender, RoutedEventArgs e) {
-            //DBにユーザー情報を登録する処理
-            
+            //null値が含まれている場合のエラー処理
+            /*
+            if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.UserIdText.Text) ||
+                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.NameText.Text) ||
+                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordText.Text) ||
+                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordConfirmationText.Text) ||
+                string.IsNullOrWhiteSpace((string)ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue) ||
+                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.GenreComboBox.SelectedValue.ToString())) {
+                MessageBox.Show("未入力項目があります", null, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            */
+            /*
+            //会員IDが一意ではない場合(既に登録されている場合)のエラー処理
+            foreach (var MemberID in infosys202127DataSet.Members.Select(x => x.MemberID).ToList()) {
+                if (MemberID.Equals(ScreenInformation.registerPage.UserIdText.Text)) {
+                    MessageBox.Show("会員IDが既に登録されています", null, MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            */
+            //2回打たれたパスワードが一致していない場合の処理
+            /*
+            if (!ScreenInformation.registerPage.PasswordText.Text.Equals(ScreenInformation.registerPage.PasswordConfirmationText.Text)) {
+                MessageBox.Show("パスワードと確認用パスワードの内容が一致しません", null, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            */
+            //DBにユーザー情報を登録する処理(新規レコードの追加)
+            //DataRow newDrv = (DataRow)infosys202127DataSet.Members.NewRow();
+            //newDrv[0] = ScreenInformation.registerPage.UserIdText.Text;
+            //newDrv[1] = ScreenInformation.registerPage.NameText.Text;
+            //newDrv[2] = ScreenInformation.registerPage.PasswordText.Text;
+            //newDrv[3] = ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue;
+            //newDrv[4] = ScreenInformation.registerPage.GenreComboBox.SelectedValue;
+            //データセットに新しいレコードを追加
+            //infosys202127DataSet.Members.Rows.Add(newDrv);
+            //データベース更新
+            //infosys202127DataSetMembersTableAdapter.Update(infosys202127DataSet.Members);
+
+            MessageBox.Show("会員情報を登録しました。");
+
             //画面切り替え処理
+            changedScreen();
+        }
+
+        //画面切り替え処理
+        private void changedScreen() {
             if (LoginInformation.loginInformation) {
                 //ログイン済みの場合の処理
 
@@ -120,11 +157,14 @@ namespace GourmetSearchApplication {
                 ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.検索;
             } else {
                 //まだログインしていない場合の処理
+
                 //登録データのリセット
                 ScreenInformation.registerPage.NameText.Text = null;
                 ScreenInformation.registerPage.UserIdText.Text = null;
                 ScreenInformation.registerPage.PasswordText.Text = null;
                 ScreenInformation.registerPage.PasswordConfirmationText.Text = null;
+                ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue = null;
+                ScreenInformation.registerPage.GenreComboBox.SelectedValue = null;
 
                 //画面表示
                 NavigationService.Navigate(ScreenInformation.loginPage);

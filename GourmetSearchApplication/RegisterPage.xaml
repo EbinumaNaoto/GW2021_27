@@ -8,13 +8,17 @@
       d:DesignHeight="650" d:DesignWidth="1300"
       Background="White"
       Title="新規会員登録画面">
+    <Page.Resources>
+        <local:infosys202127DataSet x:Key="infosys202127DataSet"/>
+        <CollectionViewSource x:Key="membersViewSource" Source="{Binding Members, Source={StaticResource infosys202127DataSet}}"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <StackPanel DockPanel.Dock="Top">
+            <StackPanel DockPanel.Dock="Top" DataContext="{StaticResource membersViewSource}">
                 <TextBlock x:Name="TitleTextBlock" Text="新規会員登録" FontSize="25" Margin="30,20,0,0" Foreground="OrangeRed" FontWeight="Bold"/>
                 <TextBlock Text="下記のフォームに入力し、登録を押してください。" FontSize="20" Margin="40,10,0,10"/>
             </StackPanel>
@@ -59,7 +63,7 @@
                 </Border>
             </StackPanel>
         </DockPanel>
-        <DockPanel Grid.Row="1">
+        <DockPanel Grid.Row="1" DataContext="{StaticResource membersViewSource}">
             <Button x:Name="ReturnButton" FontSize="40" Content="戻る" Height="60" Width="100" Margin="1050,15,0,15" Foreground="White" Background="OrangeRed" Click="ReturnButton_Click"/>
             <Button x:Name="RegisterButton" FontSize="40" Content="登録" Height="60" Width="100" Foreground="White" Margin="15" Background="OrangeRed" Click="RegisterButton_Click"/>
         </DockPanel>

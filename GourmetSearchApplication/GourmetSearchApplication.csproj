@@ -68,15 +68,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="infosys202127DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>infosys202127DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="LoginInformation.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Favorite.cs" />
-    <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\Member.cs" />
-    <Compile Include="Models\MemberDbContext.cs" />
-    <Compile Include="Models\Prefetures.cs" />
     <Compile Include="RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
@@ -129,6 +129,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="infosys202127DataSet.xsc">
+      <DependentUpon>infosys202127DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="infosys202127DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>infosys202127DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="infosys202127DataSet.xss">
+      <DependentUpon>infosys202127DataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -43,6 +43,12 @@ namespace GourmetSearchApplication {
             ScreenInformation.registerPage.TitleTextBlock.Text = "変更";
 
             //ログイン情報を取ってきて、TextBoxに表示させる処理
+            ScreenInformation.registerPage.NameText.Text = LoginInformation.MemberName;
+            ScreenInformation.registerPage.UserIdText.Text = LoginInformation.MemberID;
+            ScreenInformation.registerPage.PasswordText.Text = LoginInformation.Password;
+            ScreenInformation.registerPage.PasswordConfirmationText.Text = LoginInformation.Password;
+            ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue = LoginInformation.PrefecturesID;
+            ScreenInformation.registerPage.GenreComboBox.SelectedValue = LoginInformation.GenreID;
 
             //画面表示処理
             NavigationService.Navigate(ScreenInformation.registerPage);
@@ -87,7 +93,7 @@ namespace GourmetSearchApplication {
 
         //お気に入り登録ボタン
         private void FavoriteButton_Click(object sender, RoutedEventArgs e) {
-
+            
         }
     }
 }

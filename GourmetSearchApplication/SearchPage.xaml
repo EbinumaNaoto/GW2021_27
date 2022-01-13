@@ -26,7 +26,7 @@
             <TextBlock Text="お気に入り店舗一覧" FontSize="20" Margin="930,10,10,10"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left">
-            <DataGrid x:Name="ResultDataGrid" Height="560" Width="1000" Margin="20,0,20,20" Background="OrangeRed" AutoGenerateColumns="False">
+            <DataGrid x:Name="ResultDataGrid" Height="560" Width="1000" Margin="20,0,20,20" Background="OrangeRed" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="60" Header="店舗写真">
                         <DataGridTemplateColumn.CellTemplate>

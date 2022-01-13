@@ -35,6 +35,9 @@ namespace GourmetSearchApplication {
             // Automatically resize height and width relative to content
             this.SizeToContent = SizeToContent.WidthAndHeight;
 
+            //データベースに会員情報がある場合はログイン画面に切り替え
+            //データベースに会員情報がない場合は新規会員登録画面に切り替え
+
             Uri uri = new Uri("/loginPage.xaml", UriKind.Relative);
             frame.Source = uri;
         }
