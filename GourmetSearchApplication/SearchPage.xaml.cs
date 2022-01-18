@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 
 namespace GourmetSearchApplication {
     /// <summary>
@@ -36,7 +37,7 @@ namespace GourmetSearchApplication {
             NavigationService.Navigate(ScreenInformation.loginPage);
             ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.ログイン;
         }
-        
+
         //変更ボタン
         private void ChangeButton_Click(object sender, RoutedEventArgs e) {
             //画面タイトル変更処理
@@ -78,7 +79,7 @@ namespace GourmetSearchApplication {
                     Information = x.Element("{http://webservice.recruit.co.jp/HotPepper/}catch").Value,
                     Time = x.Element("{http://webservice.recruit.co.jp/HotPepper/}open").Value,
                     Address = x.Element("{http://webservice.recruit.co.jp/HotPepper/}address").Value,
-                    Station = x.Element("{http://webservice.recruit.co.jp/HotPepper/}station_name").Value+"駅",
+                    Station = x.Element("{http://webservice.recruit.co.jp/HotPepper/}station_name").Value + "駅",
                     Url = x.Element("{http://webservice.recruit.co.jp/HotPepper/}urls").Element("{http://webservice.recruit.co.jp/HotPepper/}pc").Value,
                 }).ToList());
 
@@ -88,12 +89,24 @@ namespace GourmetSearchApplication {
 
         //検索テキストでEnterキーが押された時のイベントハンドラー
         private void KeywordTextBox_KeyDown(object sender, KeyEventArgs e) {
-            SearchButton_Click(sender,e);
+            SearchButton_Click(sender, e);
         }
 
         //お気に入り登録ボタン
         private void FavoriteButton_Click(object sender, RoutedEventArgs e) {
-            
+
+        }
+
+        //ResultDataGridで選択された行がダブルクリックされたとき時のイベントハンドラー
+        private void ResultDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e) {
+            var webBrowser = new WebBrowserWindow();
+            webBrowser.ShopsWebBrowser.Source = new Uri(items[ResultDataGrid.Items.IndexOf(ResultDataGrid.SelectedItem)].Url);
+            webBrowser.ShowDialog();
+        }
+
+        //NearbyShopDataGridで選択された行がダブルクリックされたとき時のイベントハンドラー
+        private void NearbyShopDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e) {
+
         }
     }
 }
