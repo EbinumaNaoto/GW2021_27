@@ -25,7 +25,9 @@ namespace GourmetSearchApplication {
     /// </summary>
     public partial class SearchPage : Page {
 
-        ObservableCollection<StoreInformation> items { get; set; } = null;
+        ObservableCollection<StoreInformation> ResultItems { get; set; } = null; //検索結果
+        ObservableCollection<StoreInformation> NearbyShopItems { get; set; } = null; //近くの店舗
+        ObservableCollection<StoreInformation> FavoriteStoreItems { get; set; } = null; //お気に入り店舗
 
         public SearchPage() {
             InitializeComponent();
@@ -72,7 +74,7 @@ namespace GourmetSearchApplication {
                 var xdoc = XDocument.Load(stream);
 
                 //apiから取得したデータをObservableClooectionに格納する
-                items = new ObservableCollection<StoreInformation>(xdoc.Root.Descendants("{http://webservice.recruit.co.jp/HotPepper/}shop").Select(x => new StoreInformation {
+                ResultItems = new ObservableCollection<StoreInformation>(xdoc.Root.Descendants("{http://webservice.recruit.co.jp/HotPepper/}shop").Select(x => new StoreInformation {
                     Photo = x.Element("{http://webservice.recruit.co.jp/HotPepper/}logo_image").Value,
                     Name = x.Element("{http://webservice.recruit.co.jp/HotPepper/}name").Value,
                     Genre = x.Element("{http://webservice.recruit.co.jp/HotPepper/}genre").Element("{http://webservice.recruit.co.jp/HotPepper/}name").Value,
@@ -83,7 +85,7 @@ namespace GourmetSearchApplication {
                     Url = x.Element("{http://webservice.recruit.co.jp/HotPepper/}urls").Element("{http://webservice.recruit.co.jp/HotPepper/}pc").Value,
                 }).ToList());
 
-                ResultDataGrid.ItemsSource = items;
+                ResultDataGrid.ItemsSource = ResultItems;
             };
         }
 
@@ -97,16 +99,48 @@ namespace GourmetSearchApplication {
 
         }
 
-        //ResultDataGridで選択された行がダブルクリックされたとき時のイベントハンドラー
+        //ResultDataGridの選択された行がダブルクリックされた時のイベントハンドラー
         private void ResultDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e) {
             var webBrowser = new WebBrowserWindow();
-            webBrowser.ShopsWebBrowser.Source = new Uri(items[ResultDataGrid.Items.IndexOf(ResultDataGrid.SelectedItem)].Url);
+            webBrowser.ShopsWebBrowser.Source = new Uri(ResultItems[ResultDataGrid.Items.IndexOf(ResultDataGrid.SelectedItem)].Url);
             webBrowser.ShowDialog();
         }
 
-        //NearbyShopDataGridで選択された行がダブルクリックされたとき時のイベントハンドラー
+        //NearbyShopDataGridの選択された行がダブルクリックされた時のイベントハンドラ
         private void NearbyShopDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e) {
+            var webBrowser = new WebBrowserWindow();
+            webBrowser.ShopsWebBrowser.Source = new Uri(NearbyShopItems[NearbyShopDataGrid.Items.IndexOf(NearbyShopDataGrid.SelectedItem)].Url);
+            webBrowser.ShowDialog();
+        }
 
+        //画面がロードされたときに呼ばれるイベントハンドラ
+        private void Page_Loaded(object sender, RoutedEventArgs e) {
+            //検索結果のリセット
+            ResultDataGrid.ItemsSource = null;
+
+            //近くのおすすめ店舗一覧とお気に入り店舗一覧の表示
+            using (var wc = new WebClient()) {
+                wc.Headers.Add("Content-type", "charset=UTF-8");                                                                         //データベースからデータを持ってくる
+                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&keyword={0}", "群馬県 ラーメン");
+                var url = new Uri(urlString);
+                var stream = wc.OpenRead(url);
+
+                var xdoc = XDocument.Load(stream);
+
+                //apiから取得したデータをObservableClooectionに格納する
+                NearbyShopItems = new ObservableCollection<StoreInformation>(xdoc.Root.Descendants("{http://webservice.recruit.co.jp/HotPepper/}shop").Select(x => new StoreInformation {
+                    Photo = x.Element("{http://webservice.recruit.co.jp/HotPepper/}logo_image").Value,
+                    Name = x.Element("{http://webservice.recruit.co.jp/HotPepper/}name").Value,
+                    Genre = x.Element("{http://webservice.recruit.co.jp/HotPepper/}genre").Element("{http://webservice.recruit.co.jp/HotPepper/}name").Value,
+                    Information = x.Element("{http://webservice.recruit.co.jp/HotPepper/}catch").Value,
+                    Time = x.Element("{http://webservice.recruit.co.jp/HotPepper/}open").Value,
+                    Address = x.Element("{http://webservice.recruit.co.jp/HotPepper/}address").Value,
+                    Station = x.Element("{http://webservice.recruit.co.jp/HotPepper/}station_name").Value + "駅",
+                    Url = x.Element("{http://webservice.recruit.co.jp/HotPepper/}urls").Element("{http://webservice.recruit.co.jp/HotPepper/}pc").Value,
+                }).ToList());
+
+                NearbyShopDataGrid.ItemsSource = NearbyShopItems;
+            };
         }
     }
 }

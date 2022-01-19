@@ -12,8 +12,8 @@
         <StackPanel DockPanel.Dock="Top">
             <TextBlock Text="グルメアプリケーション" FontSize="40" Margin="75,10,75,0" Foreground="OrangeRed" FontWeight="Bold"/>
             <TextBox x:Name="UserIdText" FontSize="30" Margin="10,20,10,0" local:Placeholder.PlaceHolderText="UserID(会員ID)"/>
-            <PasswordBox x:Name="PasswordTextBox" FontSize="30" Margin="10,20,10,0" PasswordChar="*" MaxLength="14"/>
-            <!--<TextBox x:Name="PasswordText" FontSize="30" Margin="10,20,10,0" local:Placeholder.PlaceHolderText="Password"/>-->
+            <!--<PasswordBox x:Name="PasswordTextBox" FontSize="30" Margin="10,20,10,0" PasswordChar="*" MaxLength="14"/>-->
+            <TextBox x:Name="PasswordText" FontSize="30" Margin="10,20,10,0" local:PlaceholderPassword.PlaceHolderText="Password"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Width="250">
             <Button x:Name="LoginButton" FontSize="30" Content="Log in" Margin="70,20,69.6,20" Foreground="White"  Background="OrangeRed" Click="LoginButton_Click"/>

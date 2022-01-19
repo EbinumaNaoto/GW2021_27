@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GourmetSearchApplication"
         mc:Ignorable="d"
-        Title="グルメサーチアプリケーション" ResizeMode="NoResize">
+        Title="グルメアプリケーション" ResizeMode="NoResize">
     <Grid>
         <Frame Name="frame" NavigationUIVisibility="Hidden"/>
     </Grid>

@@ -9,7 +9,7 @@ namespace GourmetSearchApplication {
     class LoginInformation {
         //ユーザー情報
         public static string MemberID { get; set; } //会員ID
-        public static string MemberName { get; set; } = "海老沼 尚人";//会員名
+        public static string MemberName { get; set; } = "田中 太郎";//会員名
         public static string Password { get; set; } //パスワード
         public static int PrefecturesID { get; set; } //都道府県ID
         public static int GenreID { get; set; } //ジャンルID
