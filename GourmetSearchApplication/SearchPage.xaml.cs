@@ -35,6 +35,13 @@ namespace GourmetSearchApplication {
 
         //ログアウトボタン
         private void LogoutButton_Click(object sender, RoutedEventArgs e) {
+            //ログイン情報をリセットする
+            LoginInformation.MemberID = null;
+            LoginInformation.MemberName = null;
+            LoginInformation.Password = null;
+            LoginInformation.GenreID = -1;
+            LoginInformation.PrefecturesID = -1;
+
             LoginInformation.loginInformation = false; //ログアウト情報を持たせる
             NavigationService.Navigate(ScreenInformation.loginPage);
             ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.ログイン;
@@ -42,9 +49,6 @@ namespace GourmetSearchApplication {
 
         //変更ボタン
         private void ChangeButton_Click(object sender, RoutedEventArgs e) {
-            //画面タイトル変更処理
-            ScreenInformation.registerPage.TitleTextBlock.Text = "変更";
-
             //ログイン情報を取ってきて、TextBoxに表示させる処理
             ScreenInformation.registerPage.NameText.Text = LoginInformation.MemberName;
             ScreenInformation.registerPage.UserIdText.Text = LoginInformation.MemberID;
@@ -52,6 +56,10 @@ namespace GourmetSearchApplication {
             ScreenInformation.registerPage.PasswordConfirmationText.Text = LoginInformation.Password;
             ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue = LoginInformation.PrefecturesID;
             ScreenInformation.registerPage.GenreComboBox.SelectedValue = LoginInformation.GenreID;
+
+            //画面タイトル変更処理
+            ScreenInformation.registerPage.TitleTextBlock.Text = "変更";
+            ScreenInformation.registerPage.RegisterButton.Content = "変更";
 
             //画面表示処理
             NavigationService.Navigate(ScreenInformation.registerPage);
@@ -120,8 +128,11 @@ namespace GourmetSearchApplication {
 
             //近くのおすすめ店舗一覧とお気に入り店舗一覧の表示
             using (var wc = new WebClient()) {
-                wc.Headers.Add("Content-type", "charset=UTF-8");                                                                         //データベースからデータを持ってくる
-                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&keyword={0}", "群馬県 ラーメン");
+                wc.Headers.Add("Content-type", "charset=UTF-8");
+                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&genre={0}&address={1}", 
+                    MainWindow.infosys202127DataSet.Genres.Where(x => x.GenreID == LoginInformation.GenreID).Select(x => x.GenreName).Single(), 
+                    MainWindow.infosys202127DataSet.Prefectures.Where(x => x.PrefecturesID == LoginInformation.PrefecturesID).Select(x => x.PrefecturesName).Single());
+
                 var url = new Uri(urlString);
                 var stream = wc.OpenRead(url);
 

@@ -28,10 +28,21 @@ namespace GourmetSearchApplication {
 
         //ログインボタン
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
-            //ログイン情報が一致しているかの処理
+            //一致したログイン情報を取得する
+            var memberInformation = MainWindow.infosys202127DataSet.Members.Where(x => x.MemberID == UserIdText.Text && x.Password == PasswordText.Text).ToList();
 
-            //ログイン成功時の処理
+            //ログイン情報がない場合(ログイン失敗)
+            if (memberInformation.Count() == 0) {
+                MessageBox.Show("会員情報がありません", null, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             //データベースからログイン情報をLoginInformationに登録
+            LoginInformation.MemberID = memberInformation.Select(x => x.MemberID).Single();
+            LoginInformation.MemberName = memberInformation.Select(x => x.MemberName).Single();
+            LoginInformation.Password = memberInformation.Select(x => x.Password).Single();
+            LoginInformation.GenreID = memberInformation.Select(x => x.GenreID).Single();
+            LoginInformation.PrefecturesID = memberInformation.Select(x => x.PrefecturesID).Single();
 
             //LoginInfomationの情報をもとに表示
             LoginInformation.loginInformation = true; //ログイン情報を持たせる
@@ -43,12 +54,38 @@ namespace GourmetSearchApplication {
 
         //新規会員登録ボタン
         private void SignupButton_Click(object sender, RoutedEventArgs e) {
+            //登録データのリセット
+            ScreenInformation.registerPage.NameText.Text = null;
+            ScreenInformation.registerPage.UserIdText.Text = null;
+            ScreenInformation.registerPage.PasswordText.Text = null;
+            ScreenInformation.registerPage.PasswordConfirmationText.Text = null;
+            ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue = null;
+            ScreenInformation.registerPage.GenreComboBox.SelectedValue = null;
+
             //画面タイトル変更処理
             ScreenInformation.registerPage.TitleTextBlock.Text = "新規会員登録";
+            ScreenInformation.registerPage.RegisterButton.Content = "登録";
 
             //画面表示処理
             NavigationService.Navigate(ScreenInformation.registerPage);
             ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.会員登録;
+        }
+
+        //パスワード表示・非表示ボタン
+        private void PasswordButton_Click(object sender, RoutedEventArgs e) {
+            if (PasswordText.Foreground == Brushes.White) {
+                PasswordText.Foreground = Brushes.Black;
+                PasswordButton.Content = "✖";
+            } else {
+                PasswordText.Foreground = Brushes.White;
+                PasswordButton.Content = "👁";
+            }
+        }
+
+        //ログイン画面がロードされた時のイベントハンドラ
+        private void Page_Loaded(object sender, RoutedEventArgs e) {
+            UserIdText.Text = "";
+            PasswordText.Text = "";
         }
     }
 }

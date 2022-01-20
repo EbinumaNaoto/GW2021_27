@@ -44,16 +44,16 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Left">
                 <Border BorderThickness="1" BorderBrush="LightGray" Height="70" Margin="0,0,25,0">
-                    <TextBox x:Name="NameText" FontSize="25" local:Placeholder.PlaceHolderText="例:グルメ太郎" VerticalAlignment="Center" Margin="10"/>
+                    <TextBox x:Name="NameText" FontSize="25" local:Placeholder.PlaceHolderText="例:グルメ太郎" VerticalAlignment="Center" Margin="10" MaxLength="30"/>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="LightGray"  Height="70"  Margin="0,0,25,0">
-                    <TextBox x:Name="UserIdText" FontSize="25" local:Placeholder.PlaceHolderText="例:Gourmet19 ※登録済みのIDは使用できません" VerticalAlignment="Center" Margin="10"/>
+                    <TextBox x:Name="UserIdText" FontSize="25" local:Placeholder.PlaceHolderText="例:Gourmet19 ※登録済みのIDは使用できません" VerticalAlignment="Center" Margin="10" MaxLength="20"/>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="LightGray" Height="70"  Margin="0,0,25,0">
-                    <TextBox x:Name="PasswordText" FontSize="25" local:Placeholder.PlaceHolderText="※14桁の英数字と記号を使用してください" VerticalAlignment="Center" Margin="10"/>
+                    <TextBox x:Name="PasswordText" FontSize="25" local:Placeholder.PlaceHolderText="※10桁～14桁の英数字と記号を使用してください" VerticalAlignment="Center" Margin="10" MaxLength="14"/>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="LightGray"  Height="70"  Margin="0,0,25,0">
-                    <TextBox x:Name="PasswordConfirmationText" FontSize="25" VerticalAlignment="Center" local:Placeholder.PlaceHolderText="※確認のためもう一度パスワードを入力してください" Margin="10"/>
+                    <TextBox x:Name="PasswordConfirmationText" FontSize="25" VerticalAlignment="Center" local:Placeholder.PlaceHolderText="※確認のためもう一度パスワードを入力してください" Margin="10" MaxLength="14"/>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="LightGray"  Height="70"  Margin="0,0,25,0">
                     <ComboBox x:Name="PrefecturesComboBox" FontSize="25" VerticalAlignment="Center" Margin="10" ItemsSource="{Binding PrefecturesDic}" SelectedValuePath="Key" DisplayMemberPath="Value"/>

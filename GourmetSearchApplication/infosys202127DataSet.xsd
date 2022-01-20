@@ -142,7 +142,7 @@ SELECT MemberID, MemberName, Password, PrefecturesID, GenreID FROM Members WHERE
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT MemberID, MemberName, Password, PrefecturesID, GenreID FROM dbo.Members</CommandText>
                     <Parameters />
                   </DbCommand>
@@ -231,7 +231,7 @@ SELECT PrefecturesID, PrefecturesName FROM Prefectures WHERE (PrefecturesID = @P
   <xs:element name="infosys202127DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="infosys202127DataSet" msprop:Generator_UserDSName="infosys202127DataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Favorites" msprop:Generator_TableClassName="FavoritesDataTable" msprop:Generator_TableVarName="tableFavorites" msprop:Generator_TablePropName="Favorites" msprop:Generator_RowDeletingName="FavoritesRowDeleting" msprop:Generator_RowChangingName="FavoritesRowChanging" msprop:Generator_RowEvHandlerName="FavoritesRowChangeEventHandler" msprop:Generator_RowDeletedName="FavoritesRowDeleted" msprop:Generator_UserTableName="Favorites" msprop:Generator_RowChangedName="FavoritesRowChanged" msprop:Generator_RowEvArgName="FavoritesRowChangeEvent" msprop:Generator_RowClassName="FavoritesRow">
+        <xs:element name="Favorites" msprop:Generator_TableClassName="FavoritesDataTable" msprop:Generator_TableVarName="tableFavorites" msprop:Generator_RowChangedName="FavoritesRowChanged" msprop:Generator_TablePropName="Favorites" msprop:Generator_RowDeletingName="FavoritesRowDeleting" msprop:Generator_RowChangingName="FavoritesRowChanging" msprop:Generator_RowEvHandlerName="FavoritesRowChangeEventHandler" msprop:Generator_RowDeletedName="FavoritesRowDeleted" msprop:Generator_RowClassName="FavoritesRow" msprop:Generator_UserTableName="Favorites" msprop:Generator_RowEvArgName="FavoritesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="FavoriteID" msprop:Generator_ColumnVarNameInTable="columnFavoriteID" msprop:Generator_ColumnPropNameInRow="FavoriteID" msprop:Generator_ColumnPropNameInTable="FavoriteIDColumn" msprop:Generator_UserColumnName="FavoriteID" type="xs:int" />
@@ -266,7 +266,7 @@ SELECT PrefecturesID, PrefecturesName FROM Prefectures WHERE (PrefecturesID = @P
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Genres" msprop:Generator_TableClassName="GenresDataTable" msprop:Generator_TableVarName="tableGenres" msprop:Generator_TablePropName="Genres" msprop:Generator_RowDeletingName="GenresRowDeleting" msprop:Generator_RowChangingName="GenresRowChanging" msprop:Generator_RowEvHandlerName="GenresRowChangeEventHandler" msprop:Generator_RowDeletedName="GenresRowDeleted" msprop:Generator_UserTableName="Genres" msprop:Generator_RowChangedName="GenresRowChanged" msprop:Generator_RowEvArgName="GenresRowChangeEvent" msprop:Generator_RowClassName="GenresRow">
+        <xs:element name="Genres" msprop:Generator_TableClassName="GenresDataTable" msprop:Generator_TableVarName="tableGenres" msprop:Generator_RowChangedName="GenresRowChanged" msprop:Generator_TablePropName="Genres" msprop:Generator_RowDeletingName="GenresRowDeleting" msprop:Generator_RowChangingName="GenresRowChanging" msprop:Generator_RowEvHandlerName="GenresRowChangeEventHandler" msprop:Generator_RowDeletedName="GenresRowDeleted" msprop:Generator_RowClassName="GenresRow" msprop:Generator_UserTableName="Genres" msprop:Generator_RowEvArgName="GenresRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="GenreID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnGenreID" msprop:Generator_ColumnPropNameInRow="GenreID" msprop:Generator_ColumnPropNameInTable="GenreIDColumn" msprop:Generator_UserColumnName="GenreID" type="xs:int" />
@@ -280,7 +280,7 @@ SELECT PrefecturesID, PrefecturesName FROM Prefectures WHERE (PrefecturesID = @P
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Members" msprop:Generator_TableClassName="MembersDataTable" msprop:Generator_TableVarName="tableMembers" msprop:Generator_TablePropName="Members" msprop:Generator_RowDeletingName="MembersRowDeleting" msprop:Generator_RowChangingName="MembersRowChanging" msprop:Generator_RowEvHandlerName="MembersRowChangeEventHandler" msprop:Generator_RowDeletedName="MembersRowDeleted" msprop:Generator_UserTableName="Members" msprop:Generator_RowChangedName="MembersRowChanged" msprop:Generator_RowEvArgName="MembersRowChangeEvent" msprop:Generator_RowClassName="MembersRow">
+        <xs:element name="Members" msprop:Generator_TableClassName="MembersDataTable" msprop:Generator_TableVarName="tableMembers" msprop:Generator_RowChangedName="MembersRowChanged" msprop:Generator_TablePropName="Members" msprop:Generator_RowDeletingName="MembersRowDeleting" msprop:Generator_RowChangingName="MembersRowChanging" msprop:Generator_RowEvHandlerName="MembersRowChangeEventHandler" msprop:Generator_RowDeletedName="MembersRowDeleted" msprop:Generator_RowClassName="MembersRow" msprop:Generator_UserTableName="Members" msprop:Generator_RowEvArgName="MembersRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MemberID" msprop:Generator_ColumnVarNameInTable="columnMemberID" msprop:Generator_ColumnPropNameInRow="MemberID" msprop:Generator_ColumnPropNameInTable="MemberIDColumn" msprop:Generator_UserColumnName="MemberID">
@@ -309,7 +309,7 @@ SELECT PrefecturesID, PrefecturesName FROM Prefectures WHERE (PrefecturesID = @P
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Prefectures" msprop:Generator_TableClassName="PrefecturesDataTable" msprop:Generator_TableVarName="tablePrefectures" msprop:Generator_TablePropName="Prefectures" msprop:Generator_RowDeletingName="PrefecturesRowDeleting" msprop:Generator_RowChangingName="PrefecturesRowChanging" msprop:Generator_RowEvHandlerName="PrefecturesRowChangeEventHandler" msprop:Generator_RowDeletedName="PrefecturesRowDeleted" msprop:Generator_UserTableName="Prefectures" msprop:Generator_RowChangedName="PrefecturesRowChanged" msprop:Generator_RowEvArgName="PrefecturesRowChangeEvent" msprop:Generator_RowClassName="PrefecturesRow">
+        <xs:element name="Prefectures" msprop:Generator_TableClassName="PrefecturesDataTable" msprop:Generator_TableVarName="tablePrefectures" msprop:Generator_RowChangedName="PrefecturesRowChanged" msprop:Generator_TablePropName="Prefectures" msprop:Generator_RowDeletingName="PrefecturesRowDeleting" msprop:Generator_RowChangingName="PrefecturesRowChanging" msprop:Generator_RowEvHandlerName="PrefecturesRowChangeEventHandler" msprop:Generator_RowDeletedName="PrefecturesRowDeleted" msprop:Generator_RowClassName="PrefecturesRow" msprop:Generator_UserTableName="Prefectures" msprop:Generator_RowEvArgName="PrefecturesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="PrefecturesID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnPrefecturesID" msprop:Generator_ColumnPropNameInRow="PrefecturesID" msprop:Generator_ColumnPropNameInTable="PrefecturesIDColumn" msprop:Generator_UserColumnName="PrefecturesID" type="xs:int" />
@@ -344,9 +344,9 @@ SELECT PrefecturesID, PrefecturesName FROM Prefectures WHERE (PrefecturesID = @P
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_Favorites_Members" msdata:parent="Members" msdata:child="Favorites" msdata:parentkey="MemberID" msdata:childkey="MemberID" msprop:Generator_UserChildTable="Favorites" msprop:Generator_ChildPropName="GetFavoritesRows" msprop:Generator_UserRelationName="FK_Favorites_Members" msprop:Generator_RelationVarName="relationFK_Favorites_Members" msprop:Generator_UserParentTable="Members" msprop:Generator_ParentPropName="MembersRow" />
-      <msdata:Relationship name="FK_Members_Genres" msdata:parent="Genres" msdata:child="Members" msdata:parentkey="GenreID" msdata:childkey="GenreID" msprop:Generator_UserChildTable="Members" msprop:Generator_ChildPropName="GetMembersRows" msprop:Generator_UserRelationName="FK_Members_Genres" msprop:Generator_ParentPropName="GenresRow" msprop:Generator_RelationVarName="relationFK_Members_Genres" msprop:Generator_UserParentTable="Genres" />
-      <msdata:Relationship name="FK_Members_Prefectures" msdata:parent="Prefectures" msdata:child="Members" msdata:parentkey="PrefecturesID" msdata:childkey="PrefecturesID" msprop:Generator_UserChildTable="Members" msprop:Generator_ChildPropName="GetMembersRows" msprop:Generator_UserRelationName="FK_Members_Prefectures" msprop:Generator_RelationVarName="relationFK_Members_Prefectures" msprop:Generator_UserParentTable="Prefectures" msprop:Generator_ParentPropName="PrefecturesRow" />
+      <msdata:Relationship name="FK_Favorites_Members" msdata:parent="Members" msdata:child="Favorites" msdata:parentkey="MemberID" msdata:childkey="MemberID" msprop:Generator_UserChildTable="Favorites" msprop:Generator_ChildPropName="GetFavoritesRows" msprop:Generator_UserRelationName="FK_Favorites_Members" msprop:Generator_ParentPropName="MembersRow" msprop:Generator_RelationVarName="relationFK_Favorites_Members" msprop:Generator_UserParentTable="Members" />
+      <msdata:Relationship name="FK_Members_Genres" msdata:parent="Genres" msdata:child="Members" msdata:parentkey="GenreID" msdata:childkey="GenreID" msprop:Generator_UserChildTable="Members" msprop:Generator_ChildPropName="GetMembersRows" msprop:Generator_UserRelationName="FK_Members_Genres" msprop:Generator_RelationVarName="relationFK_Members_Genres" msprop:Generator_UserParentTable="Genres" msprop:Generator_ParentPropName="GenresRow" />
+      <msdata:Relationship name="FK_Members_Prefectures" msdata:parent="Prefectures" msdata:child="Members" msdata:parentkey="PrefecturesID" msdata:childkey="PrefecturesID" msprop:Generator_UserChildTable="Members" msprop:Generator_ChildPropName="GetMembersRows" msprop:Generator_UserRelationName="FK_Members_Prefectures" msprop:Generator_ParentPropName="PrefecturesRow" msprop:Generator_RelationVarName="relationFK_Members_Prefectures" msprop:Generator_UserParentTable="Prefectures" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
