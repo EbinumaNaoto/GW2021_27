@@ -18,6 +18,7 @@ using System.Xml.Linq;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Data;
 
 namespace GourmetSearchApplication {
     /// <summary>
@@ -27,7 +28,7 @@ namespace GourmetSearchApplication {
 
         ObservableCollection<StoreInformation> ResultItems { get; set; } = null; //検索結果
         ObservableCollection<StoreInformation> NearbyShopItems { get; set; } = null; //近くの店舗
-        ObservableCollection<StoreInformation> FavoriteStoreItems { get; set; } = null; //お気に入り店舗
+        ObservableCollection<FavoriteStoreInformation> FavoriteStoreItems { get; set; } = null; //お気に入り店舗
 
         public SearchPage() {
             InitializeComponent();
@@ -104,7 +105,42 @@ namespace GourmetSearchApplication {
 
         //お気に入り登録ボタン
         private void FavoriteButton_Click(object sender, RoutedEventArgs e) {
+            try {
+                //DBにお気に入り店舗情報を登録する処理(新規レコードの追加)
+                DataRow newDrv = (DataRow)MainWindow.infosys202127DataSet.Favorites.NewRow();
+                newDrv[0] = MainWindow.infosys202127DataSet.Favorites.Last().FavoriteID + 1;
+                newDrv[1] = LoginInformation.MemberID;
+                newDrv[2] = ResultItems[ResultDataGrid.Items.IndexOf(ResultDataGrid.SelectedItem)].Name;
+                newDrv[3] = ResultItems[ResultDataGrid.Items.IndexOf(ResultDataGrid.SelectedItem)].Information;
+                newDrv[4] = ResultItems[ResultDataGrid.Items.IndexOf(ResultDataGrid.SelectedItem)].Url;
+                //データセットに新しいレコードを追加
+                MainWindow.infosys202127DataSet.Favorites.Rows.Add(newDrv);
+                //データベース更新
+                MainWindow.infosys202127DataSetFavoritesTableAdapter.Update(MainWindow.infosys202127DataSet.Favorites);
 
+                MessageBox.Show("店舗情報を登録しました。");
+
+                DisplayFavoriteStoreDataGrid();
+            } catch (NullReferenceException nre) {
+                MessageBox.Show("検索結果の店舗情報から選択してください", null, MessageBoxButton.OK, MessageBoxImage.Error);
+            } catch (ArgumentOutOfRangeException aoore) {
+                MessageBox.Show("検索結果の店舗情報から選択してください", null, MessageBoxButton.OK, MessageBoxImage.Error);
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message, null, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
+        //お気に入り削除 削除処理作成途中
+        private void FavoriteDeleteButton_Click(object sender, RoutedEventArgs e) {
+            try {
+                MainWindow.infosys202127DataSet.Favorites.Rows[FavoriteStoreItems[FavoriteStoreDataGrid.Items.IndexOf(FavoriteStoreDataGrid.SelectedItem)].FavoriteId].Delete();
+                MessageBox.Show("店舗情報を削除しました。");
+                DisplayFavoriteStoreDataGrid();
+            } catch (Exception ex) {
+                MessageBox.Show(ex.Message, null, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         //ResultDataGridの選択された行がダブルクリックされた時のイベントハンドラー
@@ -121,10 +157,19 @@ namespace GourmetSearchApplication {
             webBrowser.ShowDialog();
         }
 
+        //FavoriteStoreDataGridの選択された行がダブルクリックされた時のイベントハンドラ
+        private void FavoriteStoreDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e) {
+            var webBrowser = new WebBrowserWindow();
+            webBrowser.ShopsWebBrowser.Source = new Uri(FavoriteStoreItems[FavoriteStoreDataGrid.Items.IndexOf(FavoriteStoreDataGrid.SelectedItem)].Url);
+            webBrowser.ShowDialog();
+        }
+
         //画面がロードされたときに呼ばれるイベントハンドラ
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             //検索結果のリセット
             ResultDataGrid.ItemsSource = null;
+            //検索テキストのリセット
+            KeywordTextBox.Text = null;
 
             //近くのおすすめ店舗一覧とお気に入り店舗一覧の表示
             using (var wc = new WebClient()) {
@@ -151,7 +196,22 @@ namespace GourmetSearchApplication {
                 }).ToList());
 
                 NearbyShopDataGrid.ItemsSource = NearbyShopItems;
+
+                DisplayFavoriteStoreDataGrid();
             };
+        }
+
+        //お気に入り店舗情報を表示する処理
+        private void DisplayFavoriteStoreDataGrid() {
+            //データベースからデータをObservableClooectionに格納する
+            FavoriteStoreItems = new ObservableCollection<FavoriteStoreInformation>(MainWindow.infosys202127DataSet.Favorites.Where(x => x.MemberID == LoginInformation.MemberID).Select(x => new FavoriteStoreInformation {
+                FavoriteId = x.FavoriteID,
+                StoreName = x.StoreName,
+                StoreInformation = x.StoreInformation,
+                Url = x.StoreUrl
+            }).ToList());
+
+            FavoriteStoreDataGrid.ItemsSource = FavoriteStoreItems;
         }
     }
 }

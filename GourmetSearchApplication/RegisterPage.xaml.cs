@@ -130,6 +130,7 @@ namespace GourmetSearchApplication {
                     //ログイン済みの場合
                     //DBにユーザー情報を変更する処理(既存レコードの変更)
 
+
                     //データベース更新
                     MainWindow.infosys202127DataSetMembersTableAdapter.Update(MainWindow.infosys202127DataSet.Members);
                     

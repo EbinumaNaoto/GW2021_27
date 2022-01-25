@@ -8,11 +8,16 @@
       d:DesignHeight="750" d:DesignWidth="1500"
       Background="White"
       Title="検索画面" Loaded="Page_Loaded">
+    <Page.Resources>
+        <local:infosys202127DataSet x:Key="infosys202127DataSet"/>
+        <CollectionViewSource x:Key="favoritesViewSource" Source="{Binding Favorites, Source={StaticResource infosys202127DataSet}}"/>
+    </Page.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="LogoutButton" Content="ログアウト" Width="100" Height="30" Margin="0,20,20,20" Foreground="White"  Background="OrangeRed" Click="LogoutButton_Click"/>
             <Button x:Name="ChangeButton" Content="変更" Width="100" Height="30" Margin="0,20,20,20" Foreground="White"  Background="OrangeRed" Click="ChangeButton_Click"/>
-            <Button x:Name="FavoriteButton" Content="お気に入り登録" Width="100" Height="30" Margin="0,20,40,20" Foreground="White"  Background="OrangeRed" Click="FavoriteButton_Click"/>
+            <Button x:Name="FavoriteButton" Content="お気に入り登録" Width="100" Height="30" Margin="0,20,20,20" Foreground="White"  Background="OrangeRed" Click="FavoriteButton_Click"/>
+            <Button x:Name="FavoriteDeleteButton" Content="お気に入り削除" Width="100" Height="30" Margin="0,20,40,20" Foreground="White" Background="OrangeRed" Click="FavoriteDeleteButton_Click"/>
             <Border BorderThickness="5" BorderBrush="OrangeRed"  Margin="0,10,20,10">
                 <TextBlock x:Name="UserNameTextBlock" FontSize="30" Height="40"/>
             </Border>
@@ -26,13 +31,13 @@
             <TextBlock Text="お気に入り店舗一覧" FontSize="20" Margin="930,10,10,10"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left">
-            <DataGrid x:Name="ResultDataGrid" Height="560" Width="1000" Margin="20,0,20,20" Background="OrangeRed" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single">
+            <DataGrid x:Name="ResultDataGrid" Height="560" Width="1000" Margin="20,0,20,20" Background="OrangeRed" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True">
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseDoubleClick" Handler="ResultDataGridRow_DoubleClick"/>
                     </Style>
                 </DataGrid.ItemContainerStyle>
-                    <DataGrid.Columns>
+                <DataGrid.Columns>
                     <DataGridTemplateColumn Width="60" Header="店舗写真">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate DataType="{x:Type local:StoreInformation}">
@@ -50,9 +55,19 @@
             </DataGrid>
         </StackPanel>
         <StackPanel>
-            <DataGrid x:Name="FavoriteStoreDataGrid" Height="255" Width="440" Margin="0,0,20,0" Background="OrangeRed"/>
+            <DataGrid x:Name="FavoriteStoreDataGrid" Height="255" Width="440" Margin="0,0,20,0" Background="OrangeRed" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True">
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="FavoriteStoreDataGridRow_DoubleClick"/>
+                    </Style>
+                </DataGrid.ItemContainerStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="店舗名" Binding="{Binding StoreName}" FontSize="10" FontWeight="Bold"/>
+                    <DataGridTextColumn Header="店舗情報" Binding="{Binding StoreInformation}" FontSize="10"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <TextBlock Text="近くのおすすめ店舗一覧" FontSize="20" Margin="0,10,10,10"/>
-            <DataGrid x:Name="NearbyShopDataGrid" Height="255" Width="440" Margin="0,0,20,20" Background="OrangeRed" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single">
+            <DataGrid x:Name="NearbyShopDataGrid" Height="255" Width="440" Margin="0,0,20,20" Background="OrangeRed" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True">
                 <DataGrid.ItemContainerStyle>
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseDoubleClick" Handler="NearbyShopDataGridRow_DoubleClick"/>
