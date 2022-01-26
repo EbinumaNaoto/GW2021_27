@@ -7,7 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1300"
       Background="White"
-      Title="新規会員登録画面">
+      Title="新規会員登録画面"
+      Loaded="Page_Loaded">
     <Page.Resources>
         <local:infosys202127DataSet x:Key="infosys202127DataSet"/>
         <CollectionViewSource x:Key="membersViewSource" Source="{Binding Members, Source={StaticResource infosys202127DataSet}}"/>
@@ -27,7 +28,7 @@
                     <TextBlock Text="会員名" FontSize="25" Foreground="White" VerticalAlignment="Center"/>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="LightGray" Width="400" Height="70" Margin="25,0,0,0" Background="OrangeRed">
-                    <TextBlock Text="会員ID" FontSize="25" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock Text="会員ID(※登録後、変更はできません)" FontSize="25" Foreground="White" VerticalAlignment="Center"/>
                 </Border>
                 <Border BorderThickness="1" BorderBrush="LightGray" Width="400" Height="70" Margin="25,0,0,0" Background="OrangeRed">
                     <TextBlock Text="パスワード"  FontSize="25" Foreground="White" VerticalAlignment="Center"/>

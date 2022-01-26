@@ -26,9 +26,9 @@ namespace GourmetSearchApplication {
     /// </summary>
     public partial class SearchPage : Page {
 
-        ObservableCollection<StoreInformation> ResultItems { get; set; } = null; //検索結果
-        ObservableCollection<StoreInformation> NearbyShopItems { get; set; } = null; //近くの店舗
-        ObservableCollection<FavoriteStoreInformation> FavoriteStoreItems { get; set; } = null; //お気に入り店舗
+        ObservableCollection<StoreInformation> ResultItems { get; set; } //検索結果
+        ObservableCollection<StoreInformation> NearbyShopItems { get; set; } //近くの店舗
+        ObservableCollection<FavoriteStoreInformation> FavoriteStoreItems { get; set; } //お気に入り店舗
 
         public SearchPage() {
             InitializeComponent();
@@ -42,6 +42,11 @@ namespace GourmetSearchApplication {
             LoginInformation.Password = null;
             LoginInformation.GenreID = -1;
             LoginInformation.PrefecturesID = -1;
+
+            //ObservableCollectionの削除
+            ResultItems = null;
+            NearbyShopItems = null;
+            FavoriteStoreItems = null;
 
             LoginInformation.loginInformation = false; //ログアウト情報を持たせる
             NavigationService.Navigate(ScreenInformation.loginPage);
@@ -134,8 +139,13 @@ namespace GourmetSearchApplication {
         //お気に入り削除 削除処理作成途中
         private void FavoriteDeleteButton_Click(object sender, RoutedEventArgs e) {
             try {
-                MainWindow.infosys202127DataSet.Favorites.Rows[FavoriteStoreItems[FavoriteStoreDataGrid.Items.IndexOf(FavoriteStoreDataGrid.SelectedItem)].FavoriteId].Delete();
+                //選択行の削除
+                MainWindow.infosys202127DataSet.Favorites.Rows[MainWindow.infosys202127DataSet.Favorites.Select(x => x.FavoriteID).ToList().FindIndex(x => x == FavoriteStoreItems[FavoriteStoreDataGrid.Items.IndexOf(FavoriteStoreDataGrid.SelectedItem)].FavoriteId)].Delete();
+                //データベースの更新
+                MainWindow.infosys202127DataSetFavoritesTableAdapter.Update(MainWindow.infosys202127DataSet.Favorites);
+
                 MessageBox.Show("店舗情報を削除しました。");
+                
                 DisplayFavoriteStoreDataGrid();
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, null, MessageBoxButton.OK, MessageBoxImage.Error);

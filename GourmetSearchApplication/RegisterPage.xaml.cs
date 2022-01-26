@@ -129,12 +129,28 @@ namespace GourmetSearchApplication {
                 if (LoginInformation.loginInformation) {
                     //ログイン済みの場合
                     //DBにユーザー情報を変更する処理(既存レコードの変更)
-
+                    DataRow drv = MainWindow.infosys202127DataSet.Members.Rows[MainWindow.infosys202127DataSet.Members.Select(x => x.MemberID).ToList().FindIndex(x => x == LoginInformation.MemberID)];
+                    drv[1] = ScreenInformation.registerPage.NameText.Text;
+                    drv[2] = ScreenInformation.registerPage.PasswordText.Text;
+                    drv[3] = ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue;
+                    drv[4] = ScreenInformation.registerPage.GenreComboBox.SelectedValue;
 
                     //データベース更新
                     MainWindow.infosys202127DataSetMembersTableAdapter.Update(MainWindow.infosys202127DataSet.Members);
                     
                     MessageBox.Show("会員情報を変更しました");
+
+                    //C#側の会員情報も更新する
+                    //データベースからログイン情報をLoginInformationに登録
+                    LoginInformation.MemberID = ScreenInformation.registerPage.UserIdText.Text;
+                    LoginInformation.MemberName = ScreenInformation.registerPage.NameText.Text;
+                    LoginInformation.Password = ScreenInformation.registerPage.PasswordText.Text;
+                    LoginInformation.GenreID = int.Parse(ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue.ToString());
+                    LoginInformation.PrefecturesID = int.Parse(ScreenInformation.registerPage.GenreComboBox.SelectedValue.ToString());
+
+                    //LoginInfomationの情報をもとに表示
+                    ScreenInformation.searchPage.UserNameTextBlock.Text = LoginInformation.MemberName + " 様"; //ユーザー名表示
+
                 } else {
                     //まだログインしていない場合
                     //DBにユーザー情報を登録する処理(新規レコードの追加)
@@ -176,6 +192,16 @@ namespace GourmetSearchApplication {
                 //画面表示
                 NavigationService.Navigate(ScreenInformation.loginPage);
                 ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.ログイン;
+            }
+        }
+
+        //画面がロードされた時のイベントハンドラ
+        private void Page_Loaded(object sender, RoutedEventArgs e) {
+            if (LoginInformation.loginInformation) {
+                //ログイン済みの場合
+                ScreenInformation.registerPage.UserIdText.IsEnabled = false;
+            } else {
+                ScreenInformation.registerPage.UserIdText.IsEnabled = true;
             }
         }
     }
