@@ -101,28 +101,76 @@ namespace GourmetSearchApplication {
 
         //登録ボタン
         private void RegisterButton_Click(object sender, RoutedEventArgs e) {
-            try {
+            //エラーメッセージのリセット
+            UserIdErrorMessageTextBlock.Text = null;
+            NameErrorMessageTextBlock.Text = null;
+            PasswordErrorMessageTextBlock.Text = null;
+            PasswordConfirmationErrorMessageTextBlock.Text = null;
+            PrefecturesErrorMessageTextBlock.Text = null;
+            GenreErrorMessageTextBlock.Text = null;
+            
+            //エラー判定
+            var errorCheck = false;
 
-                //入力項目にnullが含まれている場合
-                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.UserIdText.Text) ||
-                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.NameText.Text) ||
-                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordText.Text) ||
-                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordConfirmationText.Text) ||
-                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue.ToString()) ||
-                string.IsNullOrWhiteSpace(ScreenInformation.registerPage.GenreComboBox.SelectedValue.ToString())) {
-                    MessageBox.Show("未入力項目があります", null, MessageBoxButton.OK, MessageBoxImage.Error);
+            try {
+                //未入力項目チェック
+
+                //会員IDの未入力チェック
+                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.UserIdText.Text)) {
+                    UserIdErrorMessageTextBlock.Text = "入力されていません！";
+                    errorCheck = true;
+                }
+                    
+                //会員名の未入力チェック
+                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.NameText.Text)) {
+                    NameErrorMessageTextBlock.Text = "入力されていません！";
+                    errorCheck = true;
+                }
+                    
+                //パスワードの未入力チェック
+                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordText.Text)) {
+                    PasswordErrorMessageTextBlock.Text = "入力されていません！";
+                    errorCheck = true;
+                }
+                    
+                //確認用パスワードの未入力チェック
+                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordConfirmationText.Text)) {
+                    PasswordConfirmationErrorMessageTextBlock.Text = "入力されていません！";
+                    errorCheck = true;
+                }
+                    
+                //都道府県の未入力チェック
+                if (ScreenInformation.registerPage.PrefecturesComboBox.SelectedIndex <= -1) {
+                    PrefecturesErrorMessageTextBlock.Text = "入力されていません！";
+                    errorCheck = true;
+                }
+                    
+                //ジャンルの未入力チェック
+                if (ScreenInformation.registerPage.GenreComboBox.SelectedIndex <= -1) {
+                    GenreErrorMessageTextBlock.Text = "入力されていません！";
+                    errorCheck = true;
+                }
+
+                //エラーが発生した場合に処理を抜ける
+                if (errorCheck) {
                     return;
                 }
 
                 //passwordが文字内に収まっているか？
-                if (ScreenInformation.registerPage.PasswordText.Text.Length <= 10 && ScreenInformation.registerPage.PasswordConfirmationText.Text.Length <= 10) {
-                    MessageBox.Show("パスワードは最低でも10文字以上にしてください", null, MessageBoxButton.OK, MessageBoxImage.Error);
+                if (ScreenInformation.registerPage.PasswordText.Text.Length <= 10) {
+                    PasswordErrorMessageTextBlock.Text = "パスワードは最低でも10文字以上にしてください";
+                    return;
+                }
+
+                //確認用passwordが文字内に収まっているか？
+                if (ScreenInformation.registerPage.PasswordConfirmationText.Text.Length <= 10) {
+                    PasswordConfirmationErrorMessageTextBlock.Text = "パスワードは最低でも10文字以上にしてください";
                     return;
                 }
 
                 //passwordと確認用passwordの内容が一致しない場合
                 if (!ScreenInformation.registerPage.PasswordText.Text.Equals(ScreenInformation.registerPage.PasswordConfirmationText.Text)) {
-                    MessageBox.Show("パスワードと確認用パスワードの内容が一致しません", null, MessageBoxButton.OK, MessageBoxImage.Error);
+                    PasswordErrorMessageTextBlock.Text = "パスワードと確認用パスワードの内容が一致しません";
                     return;
                 }
 
@@ -137,7 +185,7 @@ namespace GourmetSearchApplication {
 
                     //データベース更新
                     MainWindow.infosys202127DataSetMembersTableAdapter.Update(MainWindow.infosys202127DataSet.Members);
-                    
+
                     MessageBox.Show("会員情報を変更しました");
 
                     //C#側の会員情報も更新する
@@ -170,11 +218,11 @@ namespace GourmetSearchApplication {
                 //画面切り替え処理
                 changedScreen();
 
-            } catch (ConstraintException ce) {
+            } catch (ConstraintException) {
                 //一意性制約違反
-                MessageBox.Show("入力された会員IDが既に登録されています", null, MessageBoxButton.OK, MessageBoxImage.Error);
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message, null, MessageBoxButton.OK, MessageBoxImage.Error);
+                UserIdErrorMessageTextBlock.Text = "入力された会員IDが既に登録されています";
+            } catch (Exception) {
+                //ErrorMessageTextBlock.Text = ex.Message;
             }
         }
 
@@ -197,12 +245,50 @@ namespace GourmetSearchApplication {
 
         //画面がロードされた時のイベントハンドラ
         private void Page_Loaded(object sender, RoutedEventArgs e) {
+            //エラーメッセージのリセット
+            UserIdErrorMessageTextBlock.Text = null;
+            NameErrorMessageTextBlock.Text = null;
+            PasswordErrorMessageTextBlock.Text = null;
+            PasswordConfirmationErrorMessageTextBlock.Text = null;
+            PrefecturesErrorMessageTextBlock.Text = null;
+            GenreErrorMessageTextBlock.Text = null;
+
             if (LoginInformation.loginInformation) {
                 //ログイン済みの場合
                 ScreenInformation.registerPage.UserIdText.IsEnabled = false;
             } else {
                 ScreenInformation.registerPage.UserIdText.IsEnabled = true;
             }
+        }
+
+        //会員名のテキスト内容が変更された時に呼ばれるイベントハンドラ
+        private void NameText_TextChanged(object sender, TextChangedEventArgs e) {
+            NameErrorMessageTextBlock.Text = null;
+        }
+
+        //会員IDのテキスト内容が変更された時に呼ばれるイベントハンドラ
+        private void UserIdText_TextChanged(object sender, TextChangedEventArgs e) {
+            UserIdErrorMessageTextBlock.Text = null;
+        }
+
+        //パスワードのテキスト内容が変更された時に呼ばれるイベントハンドラ
+        private void PasswordText_TextChanged(object sender, TextChangedEventArgs e) {
+            PasswordErrorMessageTextBlock.Text = null;
+        }
+
+        //確認用パスワードのテキスト内容が変更された時に呼ばれるイベントハンドラ
+        private void PasswordConfirmationText_TextChanged(object sender, TextChangedEventArgs e) {
+            PasswordConfirmationErrorMessageTextBlock.Text = null;
+        }
+
+        //都道府県が選択された時に呼ばれるイベントハンドラ
+        private void PrefecturesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            PrefecturesErrorMessageTextBlock.Text = null;
+        }
+
+        //ジャンルが選択された時に呼ばれるイベントハンドラ
+        private void GenreComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            GenreErrorMessageTextBlock.Text = null;
         }
     }
 }

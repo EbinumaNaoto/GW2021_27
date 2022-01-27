@@ -10,18 +10,19 @@
       Title="ログイン画面" Loaded="Page_Loaded">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
-            <TextBlock Text="グルメアプリケーション" FontSize="40" Margin="75,10,75,0" Foreground="OrangeRed" FontWeight="Bold"/>
-            <TextBox x:Name="UserIdText" FontSize="30" Margin="10,20,10,0" local:Placeholder.PlaceHolderText="UserID(会員ID)" MaxLength="20"/>
+            <TextBlock Text="Hotpepper検索アプリ" FontSize="40" Margin="80,10,80,0" Foreground="Red" FontWeight="Bold"  FontFamily="HGPSoeiPresenceEB"/>
+            <TextBlock x:Name="ErrorMessageTextBlock" Margin="10,0,10,0" FontSize="15" Foreground="Red"/>
+            <TextBox x:Name="UserIdText" FontSize="30" Margin="10,0,10,0" local:Placeholder.PlaceHolderText="UserID(会員ID)" MaxLength="20"/>
             <DockPanel>
                 <TextBox x:Name="PasswordText" FontSize="30" Margin="10,20,0,0" local:Placeholder.PlaceHolderText="Password" Foreground="White" Width="460" MaxLength="14"/>
                 <Button x:Name="PasswordButton" Margin="0,20,10,0" Background="White" Width="20" FontSize="10" Content="👁" Click="PasswordButton_Click"/>
             </DockPanel>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Width="250">
-            <Button x:Name="LoginButton" FontSize="30" Content="Login" Margin="70,20,69.6,20" Foreground="White"  Background="OrangeRed" Click="LoginButton_Click"/>
+            <Button x:Name="LoginButton" FontSize="30" Content="Login" Margin="70,20,69.6,20" Foreground="White"  Background="Tomato" Click="LoginButton_Click"/>
         </StackPanel>
         <StackPanel>
-            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,20" Foreground="White" Background="OrangeRed" Click="SignupButton_Click"/>
+            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,20" Foreground="White" Background="Tomato" Click="SignupButton_Click"/>
         </StackPanel>
     </DockPanel>
 </Page>

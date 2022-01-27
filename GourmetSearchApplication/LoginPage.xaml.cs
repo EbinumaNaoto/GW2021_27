@@ -33,7 +33,7 @@ namespace GourmetSearchApplication {
 
             //ログイン情報がない場合(ログイン失敗)
             if (memberInformation.Count() == 0) {
-                MessageBox.Show("会員情報がありません", null, MessageBoxButton.OK, MessageBoxImage.Error);
+                ErrorMessageTextBlock.Text = "会員情報がありません";
                 return;
             }
 
@@ -86,6 +86,7 @@ namespace GourmetSearchApplication {
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             UserIdText.Text = "";
             PasswordText.Text = "";
+            ErrorMessageTextBlock.Text = "";
         }
     }
 }

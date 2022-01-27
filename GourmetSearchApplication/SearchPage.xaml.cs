@@ -81,7 +81,7 @@ namespace GourmetSearchApplication {
             //店舗情報をxml形式で取り出す
             using (var wc = new WebClient()) {
                 wc.Headers.Add("Content-type", "charset=UTF-8");
-                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&keyword={0}", KeywordTextBox.Text);
+                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&count=100&keyword={0}", KeywordTextBox.Text);
                 var url = new Uri(urlString);
                 var stream = wc.OpenRead(url);
 
@@ -126,9 +126,9 @@ namespace GourmetSearchApplication {
                 MessageBox.Show("店舗情報を登録しました。");
 
                 DisplayFavoriteStoreDataGrid();
-            } catch (NullReferenceException nre) {
+            } catch (NullReferenceException ) {
                 MessageBox.Show("検索結果の店舗情報から選択してください", null, MessageBoxButton.OK, MessageBoxImage.Error);
-            } catch (ArgumentOutOfRangeException aoore) {
+            } catch (ArgumentOutOfRangeException) {
                 MessageBox.Show("検索結果の店舗情報から選択してください", null, MessageBoxButton.OK, MessageBoxImage.Error);
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message, null, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -136,7 +136,7 @@ namespace GourmetSearchApplication {
         }
 
 
-        //お気に入り削除 削除処理作成途中
+        //お気に入り削除
         private void FavoriteDeleteButton_Click(object sender, RoutedEventArgs e) {
             try {
                 //選択行の削除
@@ -184,7 +184,7 @@ namespace GourmetSearchApplication {
             //近くのおすすめ店舗一覧とお気に入り店舗一覧の表示
             using (var wc = new WebClient()) {
                 wc.Headers.Add("Content-type", "charset=UTF-8");
-                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&genre={0}&address={1}", 
+                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&count=100&genre={0}&address={1}", 
                     MainWindow.infosys202127DataSet.Genres.Where(x => x.GenreID == LoginInformation.GenreID).Select(x => x.GenreName).Single(), 
                     MainWindow.infosys202127DataSet.Prefectures.Where(x => x.PrefecturesID == LoginInformation.PrefecturesID).Select(x => x.PrefecturesName).Single());
 
@@ -222,6 +222,13 @@ namespace GourmetSearchApplication {
             }).ToList());
 
             FavoriteStoreDataGrid.ItemsSource = FavoriteStoreItems;
+        }
+
+        //ホットペッパーのクレジット表示
+        private void HotpepperCreditButton_Click(object sender, RoutedEventArgs e) {
+            var webBrowser = new WebBrowserWindow();
+            webBrowser.ShopsWebBrowser.Source = new Uri("http://webservice.recruit.co.jp/");
+            webBrowser.ShowDialog();
         }
     }
 }
