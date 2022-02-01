@@ -20,7 +20,7 @@ namespace GourmetSearchApplication {
     /// </summary>
     public partial class RegisterPage : Page {
 
-        public Dictionary<int, string> PrefecturesDic { get; } = new Dictionary<int, string> {
+        public Dictionary<int, string> PrefecturesDic { get; set; } = new Dictionary<int, string> {
             {1,"北海道"},
             {2,"青森県"},
             {3,"岩手県"},
@@ -69,7 +69,7 @@ namespace GourmetSearchApplication {
             {46,"鹿児島県"},
             {47,"沖縄県"},
         }; //都道府県
-        public Dictionary<int, string> GenresDic { get; } = new Dictionary<int, string> {
+        public Dictionary<int, string> GenresDic { get; set; } = new Dictionary<int, string> {
             {1,"居酒屋" },
             {2,"ダイニングバー・バル" },
             {3,"創作料理" },
@@ -108,7 +108,7 @@ namespace GourmetSearchApplication {
             PasswordConfirmationErrorMessageTextBlock.Text = null;
             PrefecturesErrorMessageTextBlock.Text = null;
             GenreErrorMessageTextBlock.Text = null;
-            
+
             //エラー判定
             var errorCheck = false;
 
@@ -120,31 +120,31 @@ namespace GourmetSearchApplication {
                     UserIdErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
-                    
+
                 //会員名の未入力チェック
                 if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.NameText.Text)) {
                     NameErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
-                    
+
                 //パスワードの未入力チェック
                 if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordText.Text)) {
                     PasswordErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
-                    
+
                 //確認用パスワードの未入力チェック
                 if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordConfirmationText.Text)) {
                     PasswordConfirmationErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
-                    
+
                 //都道府県の未入力チェック
                 if (ScreenInformation.registerPage.PrefecturesComboBox.SelectedIndex <= -1) {
                     PrefecturesErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
-                    
+
                 //ジャンルの未入力チェック
                 if (ScreenInformation.registerPage.GenreComboBox.SelectedIndex <= -1) {
                     GenreErrorMessageTextBlock.Text = "入力されていません！";
@@ -157,14 +157,14 @@ namespace GourmetSearchApplication {
                 }
 
                 //passwordが文字内に収まっているか？
-                if (ScreenInformation.registerPage.PasswordText.Text.Length <= 10) {
-                    PasswordErrorMessageTextBlock.Text = "パスワードは最低でも10文字以上にしてください";
+                if (ScreenInformation.registerPage.PasswordText.Text.Length <= 6) {
+                    PasswordErrorMessageTextBlock.Text = "パスワードは最低でも6文字以上にしてください";
                     return;
                 }
 
                 //確認用passwordが文字内に収まっているか？
-                if (ScreenInformation.registerPage.PasswordConfirmationText.Text.Length <= 10) {
-                    PasswordConfirmationErrorMessageTextBlock.Text = "パスワードは最低でも10文字以上にしてください";
+                if (ScreenInformation.registerPage.PasswordConfirmationText.Text.Length <= 6) {
+                    PasswordConfirmationErrorMessageTextBlock.Text = "パスワードは最低でも6文字以上にしてください";
                     return;
                 }
 

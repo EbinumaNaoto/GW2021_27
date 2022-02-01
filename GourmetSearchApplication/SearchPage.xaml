@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GourmetSearchApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="780" d:DesignWidth="1500"
+      d:DesignHeight="900" d:DesignWidth="1500"
       Background="White"
       Title="検索画面" Loaded="Page_Loaded">
     <Page.Resources>
@@ -37,6 +37,57 @@
                         </Border>
                     </StackPanel>
                 </Grid>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="都道府県指定" Margin="30,0,10,0" FontSize="17" Foreground="Tomato"/>
+                <TextBlock Text="ジャンル指定" Margin="330,0,10,0" FontSize="17" Foreground="Tomato"/>
+                <TextBlock Text="その他指定" Margin="430,0,10,0" FontSize="17" Foreground="Tomato"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+                <ComboBox x:Name="PrefecturesComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="200" Margin="30,5,0,5"/>
+                <CheckBox x:Name="PrefecturesCheckBox" Margin="15,6,0,0" Click="PrefecturesCheckBox_Click">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <TextBlock Text="お住まいの都道府県" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
+                <ComboBox x:Name="GenreComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="300" Margin="30,5,0,5"/>
+                <CheckBox x:Name="GenreCheckBox" Margin="15,6,0,0" Click="GenreCheckBox_Click">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <TextBlock Text="登録済みのジャンル" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
+                <CheckBox x:Name="PrivateRoomCheckBox" Margin="30,6,0,0">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <TextBlock Text="個室" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
+                <CheckBox x:Name="ParkingCheckBox" Margin="10,6,0,0">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <TextBlock Text="駐車場" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
+                <CheckBox x:Name="LunchCheckBox" Margin="10,6,0,0">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <TextBlock Text="ランチ" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
+                <CheckBox x:Name="NonSmokingCheckBox" Margin="10,6,0,0">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <TextBlock Text="禁煙席" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
+                <CheckBox x:Name="BarrierFreeCheckBox" Margin="10,6,0,0">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+                <TextBlock Text="バリアフリー" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBox x:Name="KeywordTextBox" Width="1300" FontSize="30" Margin="30,0,20,0" local:Placeholder.PlaceHolderText="キーワードを入力してください 例:店舗名、ジャンル、住所、駅名etc" KeyDown="KeywordTextBox_KeyDown"/>

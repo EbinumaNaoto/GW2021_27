@@ -32,6 +32,8 @@ namespace GourmetSearchApplication {
 
         public SearchPage() {
             InitializeComponent();
+            PrefecturesComboBox.ItemsSource = ScreenInformation.registerPage.PrefecturesDic;
+            GenreComboBox.ItemsSource = ScreenInformation.registerPage.GenresDic;
         }
 
         //ログアウトボタン
@@ -78,10 +80,35 @@ namespace GourmetSearchApplication {
             if (string.IsNullOrWhiteSpace(KeywordTextBox.Text))
                 return;
 
+            int PrefecturesId = -1; //都道府県
+            int GenreId = -1; //ジャンル
+
+            //都道府県IDの挿入
+            if ((bool)PrefecturesCheckBox.IsChecked) {
+                PrefecturesId = LoginInformation.PrefecturesID;
+            } else {
+                PrefecturesId = int.Parse(PrefecturesComboBox.SelectedValue.ToString());
+            }
+
+            //ジャンルIDの挿入
+            if ((bool)GenreCheckBox.IsChecked) {
+                GenreId = LoginInformation.GenreID;
+            } else {
+                GenreId = int.Parse(GenreComboBox.SelectedValue.ToString());
+            }
+
             //店舗情報をxml形式で取り出す
             using (var wc = new WebClient()) {
                 wc.Headers.Add("Content-type", "charset=UTF-8");
-                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&count=100&keyword={0}", KeywordTextBox.Text);
+                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&count=100&genre={0}&address={1}&private_room={2}&lunch={3}&parking={4}&non_smoking={5}&barrier_free={6}&keyword={7}",
+                    MainWindow.infosys202127DataSet.Genres.Where(x => x.GenreID == GenreId).Select(x => x.GenreName).Single(),
+                    MainWindow.infosys202127DataSet.Prefectures.Where(x => x.PrefecturesID == PrefecturesId).Select(x => x.PrefecturesName).Single(),
+                    Convert.ToInt32((bool)PrivateRoomCheckBox.IsChecked),
+                    Convert.ToInt32((bool)LunchCheckBox.IsChecked),
+                    Convert.ToInt32((bool)ParkingCheckBox.IsChecked),
+                    Convert.ToInt32((bool)NonSmokingCheckBox.IsChecked),
+                    Convert.ToInt32((bool)BarrierFreeCheckBox.IsChecked),
+                    KeywordTextBox.Text);
                 var url = new Uri(urlString);
                 var stream = wc.OpenRead(url);
 
@@ -180,6 +207,16 @@ namespace GourmetSearchApplication {
             ResultDataGrid.ItemsSource = null;
             //検索テキストのリセット
             KeywordTextBox.Text = null;
+            //検索条件のリセット
+            PrefecturesCheckBox.IsChecked = false;
+            GenreCheckBox.IsChecked = false;
+            PrivateRoomCheckBox.IsChecked = false;
+            ParkingCheckBox.IsChecked = false;
+            LunchCheckBox.IsChecked = false;
+            NonSmokingCheckBox.IsChecked = false;
+            BarrierFreeCheckBox.IsChecked = false;
+            PrefecturesComboBox.SelectedValue = null;
+            GenreComboBox.SelectedValue = null;
 
             //近くのおすすめ店舗一覧とお気に入り店舗一覧の表示
             using (var wc = new WebClient()) {
@@ -229,6 +266,30 @@ namespace GourmetSearchApplication {
             var webBrowser = new WebBrowserWindow();
             webBrowser.ShopsWebBrowser.Source = new Uri("http://webservice.recruit.co.jp/");
             webBrowser.ShowDialog();
+        }
+
+        //都道府県チェックボックスがクリックされた時に呼ばれるイベントハンドラ
+        private void PrefecturesCheckBox_Click(object sender, RoutedEventArgs e) {
+            if ((bool)PrefecturesCheckBox.IsChecked) {
+                PrefecturesComboBox.SelectedValue = null;
+                PrefecturesComboBox.IsHitTestVisible = false;
+                PrefecturesComboBox.IsTabStop = false;
+            } else {
+                PrefecturesComboBox.IsHitTestVisible = true;
+                PrefecturesComboBox.IsTabStop = true;
+            }
+        }
+
+        //ジャンルチェックボックスがクリックされた時に呼ばれるイベントハンドラ
+        private void GenreCheckBox_Click(object sender, RoutedEventArgs e) {
+            if ((bool)GenreCheckBox.IsChecked) {
+                GenreComboBox.SelectedValue = null;
+                GenreComboBox.IsHitTestVisible = false;
+                GenreComboBox.IsTabStop = false;
+            } else {
+                GenreComboBox.IsHitTestVisible = true;
+                GenreComboBox.IsTabStop = true;
+            }
         }
     }
 }
