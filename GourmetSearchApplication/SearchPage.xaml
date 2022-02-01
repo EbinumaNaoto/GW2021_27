@@ -45,44 +45,44 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
                 <ComboBox x:Name="PrefecturesComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="200" Margin="30,5,0,5"/>
-                <CheckBox x:Name="PrefecturesCheckBox" Margin="15,6,0,0" Click="PrefecturesCheckBox_Click">
+                <CheckBox x:Name="PrefecturesCheckBox" Margin="15,6,0,0" Click="PrefecturesCheckBox_Click" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
                 </CheckBox>
                 <TextBlock Text="お住まいの都道府県" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
                 <ComboBox x:Name="GenreComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="300" Margin="30,5,0,5"/>
-                <CheckBox x:Name="GenreCheckBox" Margin="15,6,0,0" Click="GenreCheckBox_Click">
+                <CheckBox x:Name="GenreCheckBox" Margin="15,6,0,0" Click="GenreCheckBox_Click" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
                 </CheckBox>
                 <TextBlock Text="登録済みのジャンル" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
-                <CheckBox x:Name="PrivateRoomCheckBox" Margin="30,6,0,0">
+                <CheckBox x:Name="PrivateRoomCheckBox" Margin="30,6,0,0" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
                 </CheckBox>
                 <TextBlock Text="個室" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
-                <CheckBox x:Name="ParkingCheckBox" Margin="10,6,0,0">
+                <CheckBox x:Name="ParkingCheckBox" Margin="10,6,0,0" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
                 </CheckBox>
                 <TextBlock Text="駐車場" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
-                <CheckBox x:Name="LunchCheckBox" Margin="10,6,0,0">
+                <CheckBox x:Name="LunchCheckBox" Margin="10,6,0,0" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
                 </CheckBox>
                 <TextBlock Text="ランチ" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
-                <CheckBox x:Name="NonSmokingCheckBox" Margin="10,6,0,0">
+                <CheckBox x:Name="NonSmokingCheckBox" Margin="10,6,0,0" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
                 </CheckBox>
                 <TextBlock Text="禁煙席" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
-                <CheckBox x:Name="BarrierFreeCheckBox" Margin="10,6,0,0">
+                <CheckBox x:Name="BarrierFreeCheckBox" Margin="10,6,0,0" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
