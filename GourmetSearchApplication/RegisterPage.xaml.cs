@@ -157,13 +157,13 @@ namespace GourmetSearchApplication {
                 }
 
                 //passwordが文字内に収まっているか？
-                if (ScreenInformation.registerPage.PasswordText.Text.Length <= 6) {
+                if (ScreenInformation.registerPage.PasswordText.Text.Length <= 5) {
                     PasswordErrorMessageTextBlock.Text = "パスワードは最低でも6文字以上にしてください";
                     return;
                 }
 
                 //確認用passwordが文字内に収まっているか？
-                if (ScreenInformation.registerPage.PasswordConfirmationText.Text.Length <= 6) {
+                if (ScreenInformation.registerPage.PasswordConfirmationText.Text.Length <= 5) {
                     PasswordConfirmationErrorMessageTextBlock.Text = "パスワードは最低でも6文字以上にしてください";
                     return;
                 }

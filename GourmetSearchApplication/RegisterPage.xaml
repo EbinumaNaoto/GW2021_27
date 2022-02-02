@@ -12,6 +12,24 @@
     <Page.Resources>
         <local:infosys202127DataSet x:Key="infosys202127DataSet"/>
         <CollectionViewSource x:Key="membersViewSource" Source="{Binding Members, Source={StaticResource infosys202127DataSet}}"/>
+        <ControlTemplate x:Key="buttonAction"
+                         TargetType="Button">
+            <Border Name="border"
+                BorderBrush="MistyRose"
+                Background="{TemplateBinding Background}">
+                <ContentPresenter VerticalAlignment="Center"
+                                  HorizontalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="border"
+                            Property="Background"
+                            Value="MistyRose" />
+                    <Setter Property="Foreground"
+                            Value="White" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -131,8 +149,8 @@
             </StackPanel>
         </DockPanel>
         <DockPanel Grid.Row="1" DataContext="{StaticResource membersViewSource}" >
-            <Button x:Name="ReturnButton" FontSize="40" Content="戻る" Height="60" Width="100" Margin="1050,15,0,15" Foreground="White" Background="Tomato" Click="ReturnButton_Click"/>
-            <Button x:Name="RegisterButton" FontSize="40" Content="登録" Height="60" Width="100" Foreground="White" Margin="15" Background="Tomato" Click="RegisterButton_Click"/>
+            <Button x:Name="ReturnButton" FontSize="40" Content="戻る" Height="60" Width="100" Margin="1050,15,0,15" Foreground="White" Background="Tomato" Click="ReturnButton_Click" Template="{StaticResource buttonAction}"/>
+            <Button x:Name="RegisterButton" FontSize="40" Content="登録" Height="60" Width="100" Foreground="White" Margin="15" Background="Tomato" Click="RegisterButton_Click" Template="{StaticResource buttonAction}"/>
         </DockPanel>
     </Grid>
 </Page>

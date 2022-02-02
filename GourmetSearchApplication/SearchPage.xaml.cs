@@ -76,33 +76,12 @@ namespace GourmetSearchApplication {
 
         //検索ボタン
         private void SearchButton_Click(object sender, RoutedEventArgs e) {
-            //検索textに何もない場合はreturnを返す
-            if (string.IsNullOrWhiteSpace(KeywordTextBox.Text))
-                return;
-
-            int PrefecturesId = -1; //都道府県
-            int GenreId = -1; //ジャンル
-
-            //都道府県IDの挿入
-            if ((bool)PrefecturesCheckBox.IsChecked) {
-                PrefecturesId = LoginInformation.PrefecturesID;
-            } else {
-                PrefecturesId = int.Parse(PrefecturesComboBox.SelectedValue.ToString());
-            }
-
-            //ジャンルIDの挿入
-            if ((bool)GenreCheckBox.IsChecked) {
-                GenreId = LoginInformation.GenreID;
-            } else {
-                GenreId = int.Parse(GenreComboBox.SelectedValue.ToString());
-            }
-
             //店舗情報をxml形式で取り出す
             using (var wc = new WebClient()) {
                 wc.Headers.Add("Content-type", "charset=UTF-8");
                 var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&count=100&genre={0}&address={1}&private_room={2}&lunch={3}&parking={4}&non_smoking={5}&barrier_free={6}&keyword={7}",
-                    MainWindow.infosys202127DataSet.Genres.Where(x => x.GenreID == GenreId).Select(x => x.GenreName).Single(),
-                    MainWindow.infosys202127DataSet.Prefectures.Where(x => x.PrefecturesID == PrefecturesId).Select(x => x.PrefecturesName).Single(),
+                    MainWindow.infosys202127DataSet.Genres.Where(x => x.GenreID == int.Parse(GenreComboBox.SelectedValue.ToString())).Select(x => x.GenreName).Single(),
+                    MainWindow.infosys202127DataSet.Prefectures.Where(x => x.PrefecturesID == int.Parse(PrefecturesComboBox.SelectedValue.ToString())).Select(x => x.PrefecturesName).Single(),
                     Convert.ToInt32((bool)PrivateRoomCheckBox.IsChecked),
                     Convert.ToInt32((bool)LunchCheckBox.IsChecked),
                     Convert.ToInt32((bool)ParkingCheckBox.IsChecked),
@@ -150,15 +129,13 @@ namespace GourmetSearchApplication {
                 //データベース更新
                 MainWindow.infosys202127DataSetFavoritesTableAdapter.Update(MainWindow.infosys202127DataSet.Favorites);
 
-                MessageBox.Show("店舗情報を登録しました。");
-
                 DisplayFavoriteStoreDataGrid();
-            } catch (NullReferenceException ) {
-                MessageBox.Show("検索結果の店舗情報から選択してください", null, MessageBoxButton.OK, MessageBoxImage.Error);
+            } catch (NullReferenceException) {
+                ResultErrorTextBlock.Background = System.Windows.Media.Brushes.Red;
+                ResultErrorTextBlock.Text = "検索結果からお気に入り登録してください";
             } catch (ArgumentOutOfRangeException) {
-                MessageBox.Show("検索結果の店舗情報から選択してください", null, MessageBoxButton.OK, MessageBoxImage.Error);
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message, null, MessageBoxButton.OK, MessageBoxImage.Error);
+                ResultErrorTextBlock.Background = System.Windows.Media.Brushes.Red;
+                ResultErrorTextBlock.Text = "検索結果からお気に入り登録してください";
             }
         }
 
@@ -171,11 +148,13 @@ namespace GourmetSearchApplication {
                 //データベースの更新
                 MainWindow.infosys202127DataSetFavoritesTableAdapter.Update(MainWindow.infosys202127DataSet.Favorites);
 
-                MessageBox.Show("店舗情報を削除しました。");
-                
                 DisplayFavoriteStoreDataGrid();
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message, null, MessageBoxButton.OK, MessageBoxImage.Error);
+            } catch (IndexOutOfRangeException) {
+                FavoriteErrorTextBlock.Background = System.Windows.Media.Brushes.Red;
+                FavoriteErrorTextBlock.Text = "お気に入り店舗を選択してから削除してください";
+            } catch(ArgumentOutOfRangeException) {
+                FavoriteErrorTextBlock.Background = System.Windows.Media.Brushes.Red;
+                FavoriteErrorTextBlock.Text = "お気に入り店舗を選択してから削除してください";
             }
             
         }
@@ -215,8 +194,8 @@ namespace GourmetSearchApplication {
             LunchCheckBox.IsChecked = false;
             NonSmokingCheckBox.IsChecked = false;
             BarrierFreeCheckBox.IsChecked = false;
-            PrefecturesComboBox.SelectedValue = null;
-            GenreComboBox.SelectedValue = null;
+            PrefecturesComboBox.SelectedValue = LoginInformation.PrefecturesID;
+            GenreComboBox.SelectedValue = LoginInformation.GenreID;
 
             //近くのおすすめ店舗一覧とお気に入り店舗一覧の表示
             using (var wc = new WebClient()) {
@@ -271,7 +250,7 @@ namespace GourmetSearchApplication {
         //都道府県チェックボックスがクリックされた時に呼ばれるイベントハンドラ
         private void PrefecturesCheckBox_Click(object sender, RoutedEventArgs e) {
             if ((bool)PrefecturesCheckBox.IsChecked) {
-                PrefecturesComboBox.SelectedValue = null;
+                PrefecturesComboBox.SelectedValue = LoginInformation.PrefecturesID;
                 PrefecturesComboBox.IsHitTestVisible = false;
                 PrefecturesComboBox.IsTabStop = false;
             } else {
@@ -283,13 +262,25 @@ namespace GourmetSearchApplication {
         //ジャンルチェックボックスがクリックされた時に呼ばれるイベントハンドラ
         private void GenreCheckBox_Click(object sender, RoutedEventArgs e) {
             if ((bool)GenreCheckBox.IsChecked) {
-                GenreComboBox.SelectedValue = null;
+                GenreComboBox.SelectedValue = LoginInformation.GenreID;
                 GenreComboBox.IsHitTestVisible = false;
                 GenreComboBox.IsTabStop = false;
             } else {
                 GenreComboBox.IsHitTestVisible = true;
                 GenreComboBox.IsTabStop = true;
             }
+        }
+
+        //お気に入り店舗が選ばれた時に呼ばれるイベントハンドラ
+        private void FavoriteStoreDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            FavoriteErrorTextBlock.Background = System.Windows.Media.Brushes.White;
+            FavoriteErrorTextBlock.Text = "";
+        }
+
+        //検索店舗が選ばれた時に呼ばれるイベントハンドラ
+        private void ResultDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            ResultErrorTextBlock.Background = System.Windows.Media.Brushes.White;
+            ResultErrorTextBlock.Text = "";
         }
     }
 }

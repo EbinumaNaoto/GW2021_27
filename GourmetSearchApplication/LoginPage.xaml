@@ -8,6 +8,26 @@
       d:DesignHeight="300" d:DesignWidth="500"
       Background="White"
       Title="ログイン画面" Loaded="Page_Loaded">
+    <Page.Resources>
+        <ControlTemplate x:Key="buttonAction"
+                         TargetType="Button">
+            <Border Name="border"
+                BorderBrush="MistyRose"
+                Background="{TemplateBinding Background}">
+                <ContentPresenter VerticalAlignment="Center"
+                                  HorizontalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="border"
+                            Property="Background"
+                            Value="MistyRose" />
+                    <Setter Property="Foreground"
+                            Value="White" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <TextBlock Text="Hotpepper検索アプリ" FontSize="40" Margin="80,10,80,0" Foreground="Red" FontWeight="Bold"  FontFamily="HGPSoeiPresenceEB"/>
@@ -19,10 +39,10 @@
             </DockPanel>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Width="250">
-            <Button x:Name="LoginButton" FontSize="30" Content="Login" Margin="70,20,69.6,20" Foreground="White"  Background="Tomato" Click="LoginButton_Click"/>
+            <Button x:Name="LoginButton" FontSize="30" Content="Login" Margin="70,20,69.6,20" Foreground="White"  Background="Tomato" Click="LoginButton_Click" Template="{StaticResource buttonAction}"/>
         </StackPanel>
         <StackPanel>
-            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,20" Foreground="White" Background="Tomato" Click="SignupButton_Click"/>
+            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,20" Foreground="White" Background="Tomato" Click="SignupButton_Click" Template="{StaticResource buttonAction}"/>
         </StackPanel>
     </DockPanel>
 </Page>
