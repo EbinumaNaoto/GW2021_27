@@ -53,7 +53,7 @@
             <Border Name="border"
                 BorderThickness="2"
                 BorderBrush="{TemplateBinding BorderBrush}"
-                CornerRadius="20">
+                CornerRadius="10">
                 <ContentPresenter VerticalAlignment="Center"
                                   HorizontalAlignment="Center" />
             </Border>
@@ -116,9 +116,9 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
                 <ComboBox x:Name="PrefecturesComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="200" Margin="35,5,0,5"/>
-                <Button x:Name="PrefecturesButton" Content="お住まいの都道府県" Foreground="DimGray" Background="White" BorderBrush="LightGray" FontSize="20" Height="40" Click="PrefecturesButton_Click" Margin="10,0,0,0" Template="{StaticResource buttonAction3}"/>
+                <Button x:Name="PrefecturesButton" Content="お住まいの都道府県" Foreground="DimGray" Background="White" BorderBrush="LightGray" FontSize="20" Height="40" Width="180" Click="PrefecturesButton_Click" Margin="10,0,0,0" Template="{StaticResource buttonAction3}"/>
                 <ComboBox x:Name="GenreComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="300" Margin="40,5,0,5"/>
-                <Button x:Name="GenreButton" Content="登録済みのジャンル"  Foreground="DimGray" Background="White" BorderBrush="LightGray" FontSize="20" Height="40" Click="GenreButton_Click" Margin="10,0,0,0" Template="{StaticResource buttonAction3}"/>
+                <Button x:Name="GenreButton" Content="登録済みのジャンル"  Foreground="DimGray" Background="White" BorderBrush="LightGray" FontSize="20" Height="40" Width="170" Click="GenreButton_Click" Margin="10,0,0,0" Template="{StaticResource buttonAction3}"/>
                 <CheckBox x:Name="PrivateRoomCheckBox" Margin="40,6,0,0" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
