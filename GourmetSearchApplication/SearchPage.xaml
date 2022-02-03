@@ -14,7 +14,7 @@
         <ControlTemplate x:Key="buttonAction"
                          TargetType="Button">
             <Border Name="border"
-                BorderBrush="MistyRose"
+                BorderBrush="LightSalmon"
                 Background="{TemplateBinding Background}"
                 CornerRadius="10">
                 <ContentPresenter VerticalAlignment="Center"
@@ -24,7 +24,7 @@
                 <Trigger Property="IsMouseOver" Value="true">
                     <Setter TargetName="border"
                             Property="Background"
-                            Value="MistyRose" />
+                            Value="LightSalmon" />
                     <Setter Property="Foreground"
                             Value="White" />
                 </Trigger>
@@ -33,7 +33,7 @@
         <ControlTemplate x:Key="buttonAction2"
                          TargetType="Button">
             <Border Name="border"
-                BorderBrush="MistyRose"
+                BorderBrush="LightSalmon"
                 Background="{TemplateBinding Background}">
                 <ContentPresenter VerticalAlignment="Center"
                                   HorizontalAlignment="Center" />
@@ -42,7 +42,43 @@
                 <Trigger Property="IsMouseOver" Value="true">
                     <Setter TargetName="border"
                             Property="Background"
-                            Value="MistyRose" />
+                            Value="LightSalmon" />
+                    <Setter Property="Foreground"
+                            Value="White" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="buttonAction3"
+                         TargetType="Button">
+            <Border Name="border"
+                BorderThickness="2"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                CornerRadius="20">
+                <ContentPresenter VerticalAlignment="Center"
+                                  HorizontalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="border"
+                            Property="BorderBrush"
+                            Value="Red"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="buttonAction4"
+                         TargetType="Button">
+            <Border Name="border"
+                BorderBrush="CornflowerBlue"
+                Background="{TemplateBinding Background}"
+                CornerRadius="10">
+                <ContentPresenter VerticalAlignment="Center"
+                                  HorizontalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="border"
+                            Property="Background"
+                            Value="CornflowerBlue" />
                     <Setter Property="Foreground"
                             Value="White" />
                 </Trigger>
@@ -65,37 +101,25 @@
                         <TextBlock Foreground="Red" Text="Hotpepper検索アプリ" Margin="20,10,0,0" FontSize="50" FontFamily="HGPSoeiPresenceEB"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="LogoutButton" Content="ログアウト" Width="100" Height="30" Margin="0,20,10,20" Foreground="White"  Background="Tomato" Click="LogoutButton_Click" FontSize="20" Template="{StaticResource buttonAction}"/>
-                        <Button x:Name="ChangeButton" Content="変更" Width="100" Height="30" Margin="0,20,10,20" Foreground="White"  Background="Tomato" Click="ChangeButton_Click" FontSize="20" Template="{StaticResource buttonAction}"/>
-                        <Button x:Name="FavoriteButton" Content="お気に入り登録" Width="150" Height="30" Margin="0,20,10,20" Foreground="White"  Background="Tomato" Click="FavoriteButton_Click" FontSize="20" Template="{StaticResource buttonAction}"/>
-                        <Button x:Name="FavoriteDeleteButton" Content="お気に入り削除" Width="150" Height="30" Margin="0,20,20,20" Foreground="White" Background="Tomato" Click="FavoriteDeleteButton_Click" FontSize="20" Template="{StaticResource buttonAction}"/>
-                        <Border BorderThickness="5" BorderBrush="Tomato"  Margin="0,10,20,10">
+                        <Button x:Name="LogoutButton" Content="ログアウト" Width="100" Height="30" Margin="0,20,10,20" Foreground="White"  Background="RoyalBlue" Click="LogoutButton_Click" FontSize="20" Template="{StaticResource buttonAction4}"/>
+                        <Button x:Name="ChangeButton" Content="会員情報変更" Width="140" Height="30" Margin="0,20,10,20" Foreground="White"  Background="RoyalBlue" Click="ChangeButton_Click" FontSize="20" Template="{StaticResource buttonAction4}"/>
+                        <Border BorderThickness="2" BorderBrush="LightGray" Margin="0,10,20,10">
                             <TextBlock x:Name="UserNameTextBlock" FontSize="30" Height="40"/>
                         </Border>
                     </StackPanel>
                 </Grid>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
-                <TextBlock Text="都道府県指定" Margin="30,0,10,0" FontSize="17" Foreground="Tomato"/>
-                <TextBlock Text="ジャンル指定" Margin="330,0,10,0" FontSize="17" Foreground="Tomato"/>
-                <TextBlock Text="その他指定" Margin="430,0,10,0" FontSize="17" Foreground="Tomato"/>
+                <TextBlock Text="都道府県指定" Margin="40,0,10,0" FontSize="17" Foreground="Tomato"/>
+                <TextBlock Text="ジャンル指定" Margin="305,0,10,0" FontSize="17" Foreground="Tomato"/>
+                <TextBlock Text="その他指定" Margin="415,0,10,0" FontSize="17" Foreground="Tomato"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
-                <ComboBox x:Name="PrefecturesComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="200" Margin="30,5,0,5"/>
-                <CheckBox x:Name="PrefecturesCheckBox" Margin="15,6,0,0" Click="PrefecturesCheckBox_Click" IsChecked="False">
-                    <CheckBox.LayoutTransform>
-                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
-                    </CheckBox.LayoutTransform>
-                </CheckBox>
-                <TextBlock Text="お住まいの都道府県" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
-                <ComboBox x:Name="GenreComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="300" Margin="30,5,0,5"/>
-                <CheckBox x:Name="GenreCheckBox" Margin="15,6,0,0" Click="GenreCheckBox_Click" IsChecked="False">
-                    <CheckBox.LayoutTransform>
-                        <ScaleTransform ScaleX="1.8" ScaleY="2"/>
-                    </CheckBox.LayoutTransform>
-                </CheckBox>
-                <TextBlock Text="登録済みのジャンル" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
-                <CheckBox x:Name="PrivateRoomCheckBox" Margin="30,6,0,0" IsChecked="False">
+                <ComboBox x:Name="PrefecturesComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="200" Margin="35,5,0,5"/>
+                <Button x:Name="PrefecturesButton" Content="お住まいの都道府県" Foreground="DimGray" Background="White" BorderBrush="LightGray" FontSize="20" Height="40" Click="PrefecturesButton_Click" Margin="10,0,0,0" Template="{StaticResource buttonAction3}"/>
+                <ComboBox x:Name="GenreComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="300" Margin="40,5,0,5"/>
+                <Button x:Name="GenreButton" Content="登録済みのジャンル"  Foreground="DimGray" Background="White" BorderBrush="LightGray" FontSize="20" Height="40" Click="GenreButton_Click" Margin="10,0,0,0" Template="{StaticResource buttonAction3}"/>
+                <CheckBox x:Name="PrivateRoomCheckBox" Margin="40,6,0,0" IsChecked="False">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="2"/>
                     </CheckBox.LayoutTransform>
@@ -127,8 +151,9 @@
                 <TextBlock Text="バリアフリー" FontSize="20" Margin="0,9,0,0" Foreground="DimGray"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
-                <TextBox x:Name="KeywordTextBox" Width="1320" FontSize="30" Margin="30,0,0,0" local:Placeholder.PlaceHolderText="キーワードを入力してください 例:店舗名、ジャンル、住所、駅名etc" KeyDown="KeywordTextBox_KeyDown"/>
-                <Button x:Name="SearchButton" Content="検索" FontSize="30" Width="130"  Foreground="White"  Background="Tomato" Click="SearchButton_Click" Template="{StaticResource buttonAction2}"/>
+                <TextBox x:Name="KeywordTextBox" Width="700" FontSize="30" Margin="50,10,0,0" local:Placeholder.PlaceHolderText="キーワードを入力してください" KeyDown="KeywordTextBox_KeyDown"/>
+                <Button x:Name="SearchButton" Content="検索" FontSize="30" Width="130" Margin="0,10,0,0"  Foreground="White"  Background="Tomato" Click="SearchButton_Click" Template="{StaticResource buttonAction2}"/>
+                <TextBlock x:Name="ErrorTextBlock" Margin="30,10,0,0" FontSize="30" Foreground="White" FontWeight="ExtraBlack" Background="Red"/>
             </StackPanel>
             <DockPanel DockPanel.Dock="Top" Height="40">
                 <Grid>
@@ -138,16 +163,16 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
                 <StackPanel Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left">
-                    <TextBlock Text="検索結果" FontSize="30" Margin="20,0,10,0" Foreground="Tomato"/>
-                    <TextBlock x:Name="ResultErrorTextBlock" FontSize="10" VerticalAlignment="Bottom" Foreground="White" Width="890" Margin="5,0,0,0"/>
+                    <TextBlock Text="検索結果" FontSize="30" Margin="20,0,900,0" Foreground="Tomato"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBlock Text="お気に入り店舗一覧" FontSize="30" Margin="0,0,10,0" Foreground="Tomato"/>
-                    <TextBlock x:Name="FavoriteErrorTextBlock" FontSize="10" VerticalAlignment="Bottom" Foreground="White" Margin="5,0,0,0"/>
+                    <Button x:Name="FavoriteButton" Content="登録" Width="70" Height="30" Margin="5,0,0,0" Foreground="White"  Background="Tomato" Click="FavoriteButton_Click" FontSize="20" Template="{StaticResource buttonAction}"/>
+                    <Button x:Name="FavoriteDeleteButton" Content="削除" Width="70" Height="30" Margin="10,0,0,0" Foreground="White" Background="Tomato" Click="FavoriteDeleteButton_Click" FontSize="20" Template="{StaticResource buttonAction}"/>
                 </StackPanel>
             </DockPanel>
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" HorizontalAlignment="Left" Height="590">
-                <DataGrid x:Name="ResultDataGrid" Height="590" Width="1000" Margin="20,0,20,0" Background="White" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True" AlternatingRowBackground="Tomato" SelectionChanged="ResultDataGrid_SelectionChanged">
+                <DataGrid x:Name="ResultDataGrid" Height="590" Width="1000" Margin="20,0,20,0" Background="White" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True" AlternatingRowBackground="MistyRose" SelectionChanged="ResultDataGrid_SelectionChanged">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="ResultDataGridRow_DoubleClick"/>
@@ -162,16 +187,16 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="店舗名" Binding="{Binding Name}" FontSize="25" FontWeight="Bold"/>
-                        <DataGridTextColumn Header="ジャンル" Binding="{Binding Genre}" FontSize="20"/>
                         <DataGridTextColumn Header="店舗情報" Binding="{Binding Information}" FontSize="20"/>
                         <DataGridTextColumn Header="営業時間" Binding="{Binding Time}" FontSize="20"/>
                         <DataGridTextColumn Header="住所" Binding="{Binding Address}" FontSize="20"/>
                         <DataGridTextColumn Header="最寄り駅" Binding="{Binding Station}" FontSize="20"/>
+                        <DataGridTextColumn Header="ジャンル" Binding="{Binding Genre}" FontSize="20"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
             <StackPanel>
-                <DataGrid x:Name="FavoriteStoreDataGrid" Height="275" Width="440" Margin="0,0,20,0" Background="White" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True"  AlternatingRowBackground="Tomato" SelectionChanged="FavoriteStoreDataGrid_SelectionChanged">
+                <DataGrid x:Name="FavoriteStoreDataGrid" Height="275" Width="440" Margin="0,0,20,0" Background="White" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True"  AlternatingRowBackground="MistyRose" SelectionChanged="FavoriteStoreDataGrid_SelectionChanged">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="FavoriteStoreDataGridRow_DoubleClick"/>
@@ -183,7 +208,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="近くのおすすめ店舗一覧" FontSize="30" Margin="0,0,10,0" Foreground="Tomato"/>
-                <DataGrid x:Name="NearbyShopDataGrid" Height="275" Width="440" Margin="0,0,20,0" Background="White" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True"  AlternatingRowBackground="Tomato">
+                <DataGrid x:Name="NearbyShopDataGrid" Height="275" Width="440" Margin="0,0,20,0" Background="White" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True"  AlternatingRowBackground="MistyRose">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="NearbyShopDataGridRow_DoubleClick"/>
@@ -198,11 +223,11 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="店舗名" Binding="{Binding Name}" FontSize="20" FontWeight="Bold"/>
-                        <DataGridTextColumn Header="ジャンル" Binding="{Binding Genre}" FontSize="20"/>
                         <DataGridTextColumn Header="店舗情報" Binding="{Binding Information}" FontSize="20"/>
                         <DataGridTextColumn Header="営業時間" Binding="{Binding Time}" FontSize="20"/>
                         <DataGridTextColumn Header="住所" Binding="{Binding Address}" FontSize="20"/>
                         <DataGridTextColumn Header="最寄り駅" Binding="{Binding Station}" FontSize="20"/>
+                        <DataGridTextColumn Header="ジャンル" Binding="{Binding Genre}" FontSize="20"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

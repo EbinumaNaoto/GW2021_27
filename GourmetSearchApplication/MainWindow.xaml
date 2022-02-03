@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GourmetSearchApplication"
         mc:Ignorable="d"
-        Title="グルメアプリケーション" ResizeMode="NoResize" Loaded="Window_Loaded">
+        Title="グルメアプリケーション" ResizeMode="NoResize" Loaded="Window_Loaded"
+        Icon="https://www.sozailab.jp/db_img/sozai/61382/4d91c36772cc3bd1a56014f34e452160.png">
     <Window.Resources>
         <local:infosys202127DataSet x:Key="infosys202127DataSet"/>
         <CollectionViewSource x:Key="favoritesViewSource" Source="{Binding Favorites, Source={StaticResource infosys202127DataSet}}"/>

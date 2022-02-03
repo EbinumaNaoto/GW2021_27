@@ -12,7 +12,7 @@
         <ControlTemplate x:Key="buttonAction"
                          TargetType="Button">
             <Border Name="border"
-                BorderBrush="MistyRose"
+                BorderBrush="CornflowerBlue"
                 Background="{TemplateBinding Background}">
                 <ContentPresenter VerticalAlignment="Center"
                                   HorizontalAlignment="Center" />
@@ -21,7 +21,7 @@
                 <Trigger Property="IsMouseOver" Value="true">
                     <Setter TargetName="border"
                             Property="Background"
-                            Value="MistyRose" />
+                            Value="CornflowerBlue" />
                     <Setter Property="Foreground"
                             Value="White" />
                 </Trigger>
@@ -31,18 +31,19 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <TextBlock Text="Hotpepper検索アプリ" FontSize="40" Margin="80,10,80,0" Foreground="Red" FontWeight="Bold"  FontFamily="HGPSoeiPresenceEB"/>
-            <TextBlock x:Name="ErrorMessageTextBlock" Margin="10,0,10,0" FontSize="15" Foreground="Red"/>
-            <TextBox x:Name="UserIdText" FontSize="30" Margin="10,0,10,0" local:Placeholder.PlaceHolderText="UserID(会員ID)" MaxLength="20"/>
+            <TextBlock x:Name="UserIdErrorMessageTextBlock" Margin="10,0,10,0" FontSize="15" Foreground="Red"/>
+            <TextBox x:Name="UserIdText" FontSize="30" Margin="10,0,10,0" local:Placeholder.PlaceHolderText="UserID(会員ID)" MaxLength="20" TextChanged="UserIdText_TextChanged"/>
+            <TextBlock x:Name="PasswordErrorMessageTextBlock" Margin="10,0,10,0" FontSize="15" Foreground="Red"/>
             <DockPanel>
-                <TextBox x:Name="PasswordText" FontSize="30" Margin="10,20,0,0" local:Placeholder.PlaceHolderText="Password" Foreground="White" Width="460" MaxLength="14"/>
-                <Button x:Name="PasswordButton" Margin="0,20,10,0" Background="White" Width="20" FontSize="10" Content="👁" Click="PasswordButton_Click"/>
+                <TextBox x:Name="PasswordText" FontSize="30" Margin="10,0,0,0" local:Placeholder.PlaceHolderText="Password" Foreground="White" Width="460" MaxLength="14" TextChanged="PasswordText_TextChanged"/>
+                <Button x:Name="PasswordButton" Margin="0,0,10,0" Background="White" Width="20" FontSize="10" Content="👁" Click="PasswordButton_Click"/>
             </DockPanel>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Width="250">
-            <Button x:Name="LoginButton" FontSize="30" Content="Login" Margin="70,20,69.6,20" Foreground="White"  Background="Tomato" Click="LoginButton_Click" Template="{StaticResource buttonAction}"/>
+            <Button x:Name="LoginButton" FontSize="30" Content="ログイン" Margin="70,20,69.6,20" Foreground="White"  Background="RoyalBlue" Click="LoginButton_Click" Template="{StaticResource buttonAction}"/>
         </StackPanel>
         <StackPanel>
-            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,20" Foreground="White" Background="Tomato" Click="SignupButton_Click" Template="{StaticResource buttonAction}"/>
+            <Button x:Name="SignupButton" FontSize="30" Content="新規登録" Margin="50,20,50,20" Foreground="White" Background="RoyalBlue" Click="SignupButton_Click" Template="{StaticResource buttonAction}"/>
         </StackPanel>
     </DockPanel>
 </Page>

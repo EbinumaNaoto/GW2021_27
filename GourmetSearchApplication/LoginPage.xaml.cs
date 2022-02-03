@@ -28,12 +28,34 @@ namespace GourmetSearchApplication {
 
         //ログインボタン
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
+            //エラーチェック
+            var errorCheck = false;
+
+            //会員IDの未入力チェック
+            if (string.IsNullOrWhiteSpace(UserIdText.Text)) {
+                UserIdText.Background = Brushes.LightCoral;
+                UserIdErrorMessageTextBlock.Text = "入力されていません！";
+                errorCheck = true;
+            }
+
+            //会員IDの未入力チェック
+            if (string.IsNullOrWhiteSpace(PasswordText.Text)) {
+                PasswordText.Background = Brushes.LightCoral;
+                PasswordErrorMessageTextBlock.Text = "入力されていません！";
+                errorCheck = true;
+            }
+
+            //エラーが発生した場合に処理を抜ける
+            if (errorCheck) {
+                return;
+            }
+
             //一致したログイン情報を取得する
             var memberInformation = MainWindow.infosys202127DataSet.Members.Where(x => x.MemberID == UserIdText.Text && x.Password == PasswordText.Text).ToList();
 
             //ログイン情報がない場合(ログイン失敗)
             if (memberInformation.Count() == 0) {
-                ErrorMessageTextBlock.Text = "会員情報がありません";
+                UserIdErrorMessageTextBlock.Text = "会員情報がありません";
                 return;
             }
 
@@ -46,7 +68,7 @@ namespace GourmetSearchApplication {
 
             //LoginInfomationの情報をもとに表示
             LoginInformation.loginInformation = true; //ログイン情報を持たせる
-            ScreenInformation.searchPage.UserNameTextBlock.Text = LoginInformation.MemberName+" 様"; //ユーザー名表示
+            ScreenInformation.searchPage.UserNameTextBlock.Text = LoginInformation.MemberName; //ユーザー名表示
             
             NavigationService.Navigate(ScreenInformation.searchPage);
             ScreenInformation.displayScreen = ScreenInformation.DisplayScreen.検索;
@@ -86,7 +108,20 @@ namespace GourmetSearchApplication {
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             UserIdText.Text = "";
             PasswordText.Text = "";
-            ErrorMessageTextBlock.Text = "";
+            UserIdErrorMessageTextBlock.Text = "";
+            PasswordErrorMessageTextBlock.Text = "";
+        }
+
+        //ユーザーIDが入力された時に呼ばれるイベントハンドラ
+        private void UserIdText_TextChanged(object sender, TextChangedEventArgs e) {
+            UserIdErrorMessageTextBlock.Text = "";
+            UserIdText.Background = Brushes.White;
+        }
+
+        //パスワードが入力された時に呼ばれるイベントハンドラ
+        private void PasswordText_TextChanged(object sender, TextChangedEventArgs e) {
+            PasswordErrorMessageTextBlock.Text = "";
+            PasswordText.Background = Brushes.White;
         }
     }
 }

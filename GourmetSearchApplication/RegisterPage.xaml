@@ -15,7 +15,7 @@
         <ControlTemplate x:Key="buttonAction"
                          TargetType="Button">
             <Border Name="border"
-                BorderBrush="MistyRose"
+                BorderBrush="CornflowerBlue"
                 Background="{TemplateBinding Background}">
                 <ContentPresenter VerticalAlignment="Center"
                                   HorizontalAlignment="Center" />
@@ -24,7 +24,7 @@
                 <Trigger Property="IsMouseOver" Value="true">
                     <Setter TargetName="border"
                             Property="Background"
-                            Value="MistyRose" />
+                            Value="CornflowerBlue" />
                     <Setter Property="Foreground"
                             Value="White" />
                 </Trigger>
@@ -149,8 +149,8 @@
             </StackPanel>
         </DockPanel>
         <DockPanel Grid.Row="1" DataContext="{StaticResource membersViewSource}" >
-            <Button x:Name="ReturnButton" FontSize="40" Content="戻る" Height="60" Width="100" Margin="1050,15,0,15" Foreground="White" Background="Tomato" Click="ReturnButton_Click" Template="{StaticResource buttonAction}"/>
-            <Button x:Name="RegisterButton" FontSize="40" Content="登録" Height="60" Width="100" Foreground="White" Margin="15" Background="Tomato" Click="RegisterButton_Click" Template="{StaticResource buttonAction}"/>
+            <Button x:Name="ReturnButton" FontSize="40" Content="戻る" Height="60" Width="100" Margin="1050,15,0,15" Foreground="White" Background="RoyalBlue" Click="ReturnButton_Click" Template="{StaticResource buttonAction}"/>
+            <Button x:Name="RegisterButton" FontSize="40" Content="登録" Height="60" Width="100" Foreground="White" Margin="15" Background="RoyalBlue" Click="RegisterButton_Click" Template="{StaticResource buttonAction}"/>
         </DockPanel>
     </Grid>
 </Page>

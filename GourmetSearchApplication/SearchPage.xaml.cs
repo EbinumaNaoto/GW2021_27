@@ -19,6 +19,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Data;
+using System.Diagnostics;
 
 namespace GourmetSearchApplication {
     /// <summary>
@@ -131,11 +132,9 @@ namespace GourmetSearchApplication {
 
                 DisplayFavoriteStoreDataGrid();
             } catch (NullReferenceException) {
-                ResultErrorTextBlock.Background = System.Windows.Media.Brushes.Red;
-                ResultErrorTextBlock.Text = "検索結果からお気に入り登録してください";
+                ErrorTextBlock.Text = "検索結果からお気に入り登録してください";
             } catch (ArgumentOutOfRangeException) {
-                ResultErrorTextBlock.Background = System.Windows.Media.Brushes.Red;
-                ResultErrorTextBlock.Text = "検索結果からお気に入り登録してください";
+                ErrorTextBlock.Text = "検索結果からお気に入り登録してください";
             }
         }
 
@@ -150,34 +149,26 @@ namespace GourmetSearchApplication {
 
                 DisplayFavoriteStoreDataGrid();
             } catch (IndexOutOfRangeException) {
-                FavoriteErrorTextBlock.Background = System.Windows.Media.Brushes.Red;
-                FavoriteErrorTextBlock.Text = "お気に入り店舗を選択してから削除してください";
+                ErrorTextBlock.Text = "お気に入り店舗を選択してから削除してください";
             } catch(ArgumentOutOfRangeException) {
-                FavoriteErrorTextBlock.Background = System.Windows.Media.Brushes.Red;
-                FavoriteErrorTextBlock.Text = "お気に入り店舗を選択してから削除してください";
+                ErrorTextBlock.Text = "お気に入り店舗を選択してから削除してください";
             }
             
         }
 
         //ResultDataGridの選択された行がダブルクリックされた時のイベントハンドラー
         private void ResultDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e) {
-            var webBrowser = new WebBrowserWindow();
-            webBrowser.ShopsWebBrowser.Source = new Uri(ResultItems[ResultDataGrid.Items.IndexOf(ResultDataGrid.SelectedItem)].Url);
-            webBrowser.ShowDialog();
+            OpenUrl(ResultItems[ResultDataGrid.Items.IndexOf(ResultDataGrid.SelectedItem)].Url);
         }
 
         //NearbyShopDataGridの選択された行がダブルクリックされた時のイベントハンドラ
         private void NearbyShopDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e) {
-            var webBrowser = new WebBrowserWindow();
-            webBrowser.ShopsWebBrowser.Source = new Uri(NearbyShopItems[NearbyShopDataGrid.Items.IndexOf(NearbyShopDataGrid.SelectedItem)].Url);
-            webBrowser.ShowDialog();
+            OpenUrl(NearbyShopItems[NearbyShopDataGrid.Items.IndexOf(NearbyShopDataGrid.SelectedItem)].Url);;
         }
 
         //FavoriteStoreDataGridの選択された行がダブルクリックされた時のイベントハンドラ
         private void FavoriteStoreDataGridRow_DoubleClick(object sender, MouseButtonEventArgs e) {
-            var webBrowser = new WebBrowserWindow();
-            webBrowser.ShopsWebBrowser.Source = new Uri(FavoriteStoreItems[FavoriteStoreDataGrid.Items.IndexOf(FavoriteStoreDataGrid.SelectedItem)].Url);
-            webBrowser.ShowDialog();
+            OpenUrl(FavoriteStoreItems[FavoriteStoreDataGrid.Items.IndexOf(FavoriteStoreDataGrid.SelectedItem)].Url);
         }
 
         //画面がロードされたときに呼ばれるイベントハンドラ
@@ -187,8 +178,6 @@ namespace GourmetSearchApplication {
             //検索テキストのリセット
             KeywordTextBox.Text = null;
             //検索条件のリセット
-            PrefecturesCheckBox.IsChecked = false;
-            GenreCheckBox.IsChecked = false;
             PrivateRoomCheckBox.IsChecked = false;
             ParkingCheckBox.IsChecked = false;
             LunchCheckBox.IsChecked = false;
@@ -242,45 +231,44 @@ namespace GourmetSearchApplication {
 
         //ホットペッパーのクレジット表示
         private void HotpepperCreditButton_Click(object sender, RoutedEventArgs e) {
-            var webBrowser = new WebBrowserWindow();
-            webBrowser.ShopsWebBrowser.Source = new Uri("http://webservice.recruit.co.jp/");
-            webBrowser.ShowDialog();
-        }
-
-        //都道府県チェックボックスがクリックされた時に呼ばれるイベントハンドラ
-        private void PrefecturesCheckBox_Click(object sender, RoutedEventArgs e) {
-            if ((bool)PrefecturesCheckBox.IsChecked) {
-                PrefecturesComboBox.SelectedValue = LoginInformation.PrefecturesID;
-                PrefecturesComboBox.IsHitTestVisible = false;
-                PrefecturesComboBox.IsTabStop = false;
-            } else {
-                PrefecturesComboBox.IsHitTestVisible = true;
-                PrefecturesComboBox.IsTabStop = true;
-            }
-        }
-
-        //ジャンルチェックボックスがクリックされた時に呼ばれるイベントハンドラ
-        private void GenreCheckBox_Click(object sender, RoutedEventArgs e) {
-            if ((bool)GenreCheckBox.IsChecked) {
-                GenreComboBox.SelectedValue = LoginInformation.GenreID;
-                GenreComboBox.IsHitTestVisible = false;
-                GenreComboBox.IsTabStop = false;
-            } else {
-                GenreComboBox.IsHitTestVisible = true;
-                GenreComboBox.IsTabStop = true;
-            }
+            OpenUrl("http://webservice.recruit.co.jp/");
         }
 
         //お気に入り店舗が選ばれた時に呼ばれるイベントハンドラ
         private void FavoriteStoreDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            FavoriteErrorTextBlock.Background = System.Windows.Media.Brushes.White;
-            FavoriteErrorTextBlock.Text = "";
+            ErrorTextBlock.Text = "";
         }
 
         //検索店舗が選ばれた時に呼ばれるイベントハンドラ
         private void ResultDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            ResultErrorTextBlock.Background = System.Windows.Media.Brushes.White;
-            ResultErrorTextBlock.Text = "";
+            ErrorTextBlock.Text = "";
+        }
+
+        //選択されたurlをedgeに表示する
+        private void OpenUrl(string url) {
+            ProcessStartInfo pi = new ProcessStartInfo() {
+                FileName = url,
+                UseShellExecute = true,
+            };
+            try {
+                Process.Start(pi);
+            } catch (System.ComponentModel.Win32Exception noBrowser) {
+                if (noBrowser.ErrorCode == -2147467259)
+                    ErrorTextBlock.Text = noBrowser.Message;
+            } catch (System.Exception other) {
+                ErrorTextBlock.Text = other.Message;
+            }
+
+        }
+
+        //ジャンルボタン
+        private void GenreButton_Click(object sender, RoutedEventArgs e) {
+            GenreComboBox.SelectedValue = LoginInformation.GenreID;
+        }
+
+        //都道府県ボタン
+        private void PrefecturesButton_Click(object sender, RoutedEventArgs e) {
+            PrefecturesComboBox.SelectedValue = LoginInformation.PrefecturesID;
         }
     }
 }
