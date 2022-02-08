@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -116,37 +117,37 @@ namespace GourmetSearchApplication {
                 //未入力項目チェック
 
                 //会員IDの未入力チェック
-                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.UserIdText.Text)) {
+                if (string.IsNullOrWhiteSpace(UserIdText.Text)) {
                     UserIdErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
 
                 //会員名の未入力チェック
-                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.NameText.Text)) {
+                if (string.IsNullOrWhiteSpace(NameText.Text)) {
                     NameErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
 
                 //パスワードの未入力チェック
-                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordText.Text)) {
+                if (string.IsNullOrWhiteSpace(PasswordText.Text)) {
                     PasswordErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
 
                 //確認用パスワードの未入力チェック
-                if (string.IsNullOrWhiteSpace(ScreenInformation.registerPage.PasswordConfirmationText.Text)) {
+                if (string.IsNullOrWhiteSpace(PasswordConfirmationText.Text)) {
                     PasswordConfirmationErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
 
                 //都道府県の未入力チェック
-                if (ScreenInformation.registerPage.PrefecturesComboBox.SelectedIndex <= -1) {
+                if (PrefecturesComboBox.SelectedIndex <= -1) {
                     PrefecturesErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
 
                 //ジャンルの未入力チェック
-                if (ScreenInformation.registerPage.GenreComboBox.SelectedIndex <= -1) {
+                if (GenreComboBox.SelectedIndex <= -1) {
                     GenreErrorMessageTextBlock.Text = "入力されていません！";
                     errorCheck = true;
                 }
@@ -156,20 +157,32 @@ namespace GourmetSearchApplication {
                     return;
                 }
 
+                //passwordが英数字になっているか？
+                if (!new Regex("^[0-9a-zA-Z]+$").IsMatch(PasswordText.Text)) {
+                    PasswordErrorMessageTextBlock.Text = "英数字で入力してください";
+                    return;
+                }
+
+                //確認用passwordが英数字になっているか？
+                if (!new Regex("^[0-9a-zA-Z]+$").IsMatch(PasswordConfirmationText.Text)) {
+                    PasswordConfirmationErrorMessageTextBlock.Text = "英数字で入力してください";
+                    return;
+                }
+
                 //passwordが文字内に収まっているか？
-                if (ScreenInformation.registerPage.PasswordText.Text.Length <= 5) {
+                if (PasswordText.Text.Length <= 5) {
                     PasswordErrorMessageTextBlock.Text = "パスワードは最低でも6文字以上にしてください";
                     return;
                 }
 
                 //確認用passwordが文字内に収まっているか？
-                if (ScreenInformation.registerPage.PasswordConfirmationText.Text.Length <= 5) {
+                if (PasswordConfirmationText.Text.Length <= 5) {
                     PasswordConfirmationErrorMessageTextBlock.Text = "パスワードは最低でも6文字以上にしてください";
                     return;
                 }
 
                 //passwordと確認用passwordの内容が一致しない場合
-                if (!ScreenInformation.registerPage.PasswordText.Text.Equals(ScreenInformation.registerPage.PasswordConfirmationText.Text)) {
+                if (!PasswordText.Text.Equals(PasswordConfirmationText.Text)) {
                     PasswordErrorMessageTextBlock.Text = "パスワードと確認用パスワードの内容が一致しません";
                     return;
                 }
@@ -289,6 +302,28 @@ namespace GourmetSearchApplication {
         //ジャンルが選択された時に呼ばれるイベントハンドラ
         private void GenreComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             GenreErrorMessageTextBlock.Text = null;
+        }
+
+        //パスワード表示非表示ボタン
+        private void PasswordButton_Click(object sender, RoutedEventArgs e) {
+            if (PasswordText.Foreground == Brushes.White) {
+                PasswordText.Foreground = Brushes.Black;
+                PasswordButton.Content = "✖";
+            } else {
+                PasswordText.Foreground = Brushes.White;
+                PasswordButton.Content = "👁";
+            }
+        }
+
+        //確認用パスワード表示非表示ボタン
+        private void PasswordConfirmationButton_Click(object sender, RoutedEventArgs e) {
+            if (PasswordConfirmationText.Foreground == Brushes.White) {
+                PasswordConfirmationText.Foreground = Brushes.Black;
+                PasswordConfirmationButton.Content = "✖";
+            } else {
+                PasswordConfirmationText.Foreground = Brushes.White;
+                PasswordConfirmationButton.Content = "👁";
+            }
         }
     }
 }
