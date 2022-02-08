@@ -106,10 +106,15 @@ namespace GourmetSearchApplication {
 
         //ログイン画面がロードされた時のイベントハンドラ
         private void Page_Loaded(object sender, RoutedEventArgs e) {
+            //入力項目のリセット
             UserIdText.Text = "";
             PasswordText.Text = "";
+            //エラー項目のリセット
             UserIdErrorMessageTextBlock.Text = "";
             PasswordErrorMessageTextBlock.Text = "";
+            //パスワード表示項目のリセット
+            PasswordText.Foreground = Brushes.White;
+            PasswordButton.Content = "👁";
         }
 
         //ユーザーIDが入力された時に呼ばれるイベントハンドラ

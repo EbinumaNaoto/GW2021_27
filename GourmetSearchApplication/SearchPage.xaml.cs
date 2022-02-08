@@ -177,6 +177,8 @@ namespace GourmetSearchApplication {
             ResultDataGrid.ItemsSource = null;
             //検索テキストのリセット
             KeywordTextBox.Text = null;
+            //エラーメッセージのリセット
+            ErrorTextBlock.Text = null;
             //検索条件のリセット
             PrivateRoomCheckBox.IsChecked = false;
             ParkingCheckBox.IsChecked = false;
@@ -241,6 +243,11 @@ namespace GourmetSearchApplication {
 
         //検索店舗が選ばれた時に呼ばれるイベントハンドラ
         private void ResultDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            ErrorTextBlock.Text = "";
+        }
+
+        //おすすめ店舗が選ばれた時に呼ばれるイベントハンドラ
+        private void NearbyShopDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             ErrorTextBlock.Text = "";
         }
 

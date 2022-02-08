@@ -208,7 +208,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <TextBlock Text="近くのおすすめ店舗一覧" FontSize="30" Margin="0,0,10,0" Foreground="Tomato"/>
-                <DataGrid x:Name="NearbyShopDataGrid" Height="275" Width="440" Margin="0,0,20,0" Background="White" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True"  AlternatingRowBackground="MistyRose">
+                <DataGrid x:Name="NearbyShopDataGrid" Height="275" Width="440" Margin="0,0,20,0" Background="White" AutoGenerateColumns="False" CanUserResizeColumns="False" SelectionMode="Single" IsReadOnly="True"  AlternatingRowBackground="MistyRose" SelectionChanged="NearbyShopDataGrid_SelectionChanged">
                     <DataGrid.ItemContainerStyle>
                         <Style TargetType="DataGridRow">
                             <EventSetter Event="MouseDoubleClick" Handler="NearbyShopDataGridRow_DoubleClick"/>

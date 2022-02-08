@@ -100,7 +100,7 @@
                             <TextBlock x:Name="PasswordErrorMessageTextBlock" Margin="10,0,10,0" Foreground="Red"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <TextBox x:Name="PasswordText" FontSize="25" Width="810" local:Placeholder.PlaceHolderText="※6桁～14桁の英数字と記号を使用してください" VerticalAlignment="Center" Margin="10,0,0,10" MaxLength="14" TextChanged="PasswordText_TextChanged"/>
+                            <TextBox x:Name="PasswordText" Foreground="White" FontSize="25" Width="810" local:Placeholder.PlaceHolderText="※6桁～14桁の英数字と記号を使用してください" VerticalAlignment="Center" Margin="10,0,0,10" MaxLength="14" TextChanged="PasswordText_TextChanged"/>
                             <Button x:Name="PasswordButton" FontSize="10" Content="👁" Margin="0,3,10,14" Width="18" Click="PasswordButton_Click"/>
                         </StackPanel>
                     </Grid>
@@ -115,7 +115,7 @@
                             <TextBlock x:Name="PasswordConfirmationErrorMessageTextBlock" Margin="10,0,10,0" Foreground="Red"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <TextBox x:Name="PasswordConfirmationText" FontSize="25" Width="810" VerticalAlignment="Center" local:Placeholder.PlaceHolderText="※確認のためもう一度パスワードを入力してください" Margin="10,0,0,10" MaxLength="14" TextChanged="PasswordConfirmationText_TextChanged"/>
+                            <TextBox x:Name="PasswordConfirmationText" Foreground="White" FontSize="25" Width="810" VerticalAlignment="Center" local:Placeholder.PlaceHolderText="※確認のためもう一度パスワードを入力してください" Margin="10,0,0,10" MaxLength="14" TextChanged="PasswordConfirmationText_TextChanged"/>
                             <Button x:Name="PasswordConfirmationButton" FontSize="10" Content="👁" Margin="0,3,10,14" Width="18" Click="PasswordConfirmationButton_Click"/>
                         </StackPanel>
                     </Grid>

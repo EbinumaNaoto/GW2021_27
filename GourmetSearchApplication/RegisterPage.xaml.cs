@@ -265,7 +265,11 @@ namespace GourmetSearchApplication {
             PasswordConfirmationErrorMessageTextBlock.Text = null;
             PrefecturesErrorMessageTextBlock.Text = null;
             GenreErrorMessageTextBlock.Text = null;
-
+            //パスワード表示項目のリセット
+            PasswordText.Foreground = Brushes.White;
+            PasswordButton.Content = "👁";
+            PasswordConfirmationText.Foreground = Brushes.White;
+            PasswordConfirmationButton.Content = "👁";
             if (LoginInformation.loginInformation) {
                 //ログイン済みの場合
                 ScreenInformation.registerPage.UserIdText.IsEnabled = false;
