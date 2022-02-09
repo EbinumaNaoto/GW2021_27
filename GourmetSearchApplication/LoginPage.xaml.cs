@@ -50,6 +50,14 @@ namespace GourmetSearchApplication {
                 return;
             }
 
+            //管理者権限によるエラー処理
+            if (UserIdText.Text == "dummy") {
+                UserIdText.Text = PasswordText.Text = "";
+                UserIdText.Background = PasswordText.Background = Brushes.LightCoral;
+                UserIdErrorMessageTextBlock.Text = "管理者権限により、このアカウントではログインできません";
+                return;
+            }
+
             //一致したログイン情報を取得する
             var memberInformation = MainWindow.infosys202127DataSet.Members.Where(x => x.MemberID == UserIdText.Text && x.Password == PasswordText.Text).ToList();
 

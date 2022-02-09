@@ -206,8 +206,8 @@ namespace GourmetSearchApplication {
                     LoginInformation.MemberID = ScreenInformation.registerPage.UserIdText.Text;
                     LoginInformation.MemberName = ScreenInformation.registerPage.NameText.Text;
                     LoginInformation.Password = ScreenInformation.registerPage.PasswordText.Text;
-                    LoginInformation.GenreID = int.Parse(ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue.ToString());
-                    LoginInformation.PrefecturesID = int.Parse(ScreenInformation.registerPage.GenreComboBox.SelectedValue.ToString());
+                    LoginInformation.PrefecturesID = int.Parse(ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue.ToString());
+                    LoginInformation.GenreID = int.Parse(ScreenInformation.registerPage.GenreComboBox.SelectedValue.ToString());
 
                     //LoginInfomationの情報をもとに表示
                     ScreenInformation.searchPage.UserNameTextBlock.Text = LoginInformation.MemberName + " 様"; //ユーザー名表示
@@ -234,8 +234,6 @@ namespace GourmetSearchApplication {
             } catch (ConstraintException) {
                 //一意性制約違反
                 UserIdErrorMessageTextBlock.Text = "入力された会員IDが既に登録されています";
-            } catch (Exception) {
-                //ErrorMessageTextBlock.Text = ex.Message;
             }
         }
 

@@ -191,8 +191,8 @@ namespace GourmetSearchApplication {
             //近くのおすすめ店舗一覧とお気に入り店舗一覧の表示
             using (var wc = new WebClient()) {
                 wc.Headers.Add("Content-type", "charset=UTF-8");
-                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&count=100&genre={0}&address={1}", 
-                    MainWindow.infosys202127DataSet.Genres.Where(x => x.GenreID == LoginInformation.GenreID).Select(x => x.GenreName).Single(), 
+                var urlString = string.Format(@"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=0f725f5af8c55f63&count=100&genre={0}&address={1}",
+                    MainWindow.infosys202127DataSet.Genres.Where(x => x.GenreID == LoginInformation.GenreID).Select(x => x.GenreName).Single(),
                     MainWindow.infosys202127DataSet.Prefectures.Where(x => x.PrefecturesID == LoginInformation.PrefecturesID).Select(x => x.PrefecturesName).Single());
 
                 var url = new Uri(urlString);

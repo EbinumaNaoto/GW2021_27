@@ -32,7 +32,7 @@
         <StackPanel DockPanel.Dock="Top">
             <TextBlock Text="Hotpepper検索アプリ" FontSize="40" Margin="80,10,80,0" Foreground="Red" FontWeight="Bold"  FontFamily="HGPSoeiPresenceEB"/>
             <TextBlock x:Name="UserIdErrorMessageTextBlock" Margin="10,0,10,0" FontSize="15" Foreground="Red"/>
-            <TextBox x:Name="UserIdText" FontSize="30" Margin="10,0,10,0" local:Placeholder.PlaceHolderText="UserID(会員ID)" MaxLength="20" TextChanged="UserIdText_TextChanged"/>
+            <TextBox x:Name="UserIdText" FontSize="30" Margin="10,0,10,0" local:Placeholder.PlaceHolderText="UserID(会員ID)" MaxLength="6" TextChanged="UserIdText_TextChanged"/>
             <TextBlock x:Name="PasswordErrorMessageTextBlock" Margin="10,0,10,0" FontSize="15" Foreground="Red"/>
             <DockPanel>
                 <TextBox x:Name="PasswordText" FontSize="30" Margin="10,0,0,0" local:Placeholder.PlaceHolderText="Password" Foreground="White" Width="460" MaxLength="14" TextChanged="PasswordText_TextChanged"/>

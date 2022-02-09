@@ -111,8 +111,8 @@
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Text="都道府県指定" Margin="40,0,10,0" FontSize="17" Foreground="Tomato"/>
-                <TextBlock Text="ジャンル指定" Margin="305,0,10,0" FontSize="17" Foreground="Tomato"/>
-                <TextBlock Text="その他指定" Margin="415,0,10,0" FontSize="17" Foreground="Tomato"/>
+                <TextBlock Text="ジャンル指定" Margin="320,0,10,0" FontSize="17" Foreground="Tomato"/>
+                <TextBlock Text="その他指定" Margin="425,0,10,0" FontSize="17" Foreground="Tomato"/>
             </StackPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left">
                 <ComboBox x:Name="PrefecturesComboBox" FontSize="20" VerticalAlignment="Center" SelectedValuePath="Key" DisplayMemberPath="Value" Width="200" Margin="35,5,0,5"/>

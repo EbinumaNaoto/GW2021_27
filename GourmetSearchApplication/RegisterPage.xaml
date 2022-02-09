@@ -72,7 +72,7 @@
                             <TextBlock x:Name="NameErrorMessageTextBlock" Margin="10,0,10,0" Foreground="Red"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1">
-                            <TextBox x:Name="NameText" FontSize="25" local:Placeholder.PlaceHolderText="例:グルメ太郎" VerticalAlignment="Center" Margin="10,0,10,10" MaxLength="30" TextChanged="NameText_TextChanged" Width="828"/>
+                            <TextBox x:Name="NameText" FontSize="25" local:Placeholder.PlaceHolderText="例:グルメ太郎" VerticalAlignment="Center" Margin="10,0,10,10" MaxLength="10" TextChanged="NameText_TextChanged" Width="828"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -86,7 +86,7 @@
                             <TextBlock x:Name="UserIdErrorMessageTextBlock" Margin="10,0,10,0" Foreground="Red"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1">
-                            <TextBox x:Name="UserIdText" FontSize="25" local:Placeholder.PlaceHolderText="例:Gourmet19 ※登録済みのIDは使用できません" VerticalAlignment="Center" Margin="10,0,10,10" MaxLength="20" TextChanged="UserIdText_TextChanged" Width="828"/>
+                            <TextBox x:Name="UserIdText" FontSize="25" local:Placeholder.PlaceHolderText="最大6文字まで ※登録済みのIDは使用できません" VerticalAlignment="Center" Margin="10,0,10,10" MaxLength="6" TextChanged="UserIdText_TextChanged" Width="828"/>
                         </StackPanel>
                     </Grid>
                 </Border>
