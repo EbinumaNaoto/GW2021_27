@@ -59,7 +59,7 @@ namespace GourmetSearchApplication {
             }
 
             //一致したログイン情報を取得する
-            var memberInformation = MainWindow.infosys202127DataSet.Members.Where(x => x.MemberID == UserIdText.Text && x.Password == PasswordText.Text).ToList();
+            var memberInformation = MainWindow.infosys202127DataSet.Members.Where(x => x.MemberID == UserIdText.Text.Trim() && x.Password == PasswordText.Text.Trim()).ToList();
 
             //ログイン情報がない場合(ログイン失敗)
             if (memberInformation.Count() == 0) {

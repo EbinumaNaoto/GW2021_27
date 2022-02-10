@@ -158,37 +158,37 @@ namespace GourmetSearchApplication {
                 }
 
                 //会員IDが英数字になっているか？
-                if (!new Regex("[0-9a-zA-Z]+$").IsMatch(UserIdText.Text)) {
+                if (!new Regex("[0-9a-zA-Z]+$").IsMatch(UserIdText.Text.Trim())) {
                     UserIdErrorMessageTextBlock.Text = "英数字で入力してください";
                     return;
                 }
 
                 //passwordが英数字になっているか？
-                if (!new Regex("^[0-9a-zA-Z]+$").IsMatch(PasswordText.Text)) {
+                if (!new Regex("^[0-9a-zA-Z]+$").IsMatch(PasswordText.Text.Trim())) {
                     PasswordErrorMessageTextBlock.Text = "英数字で入力してください";
                     return;
                 }
 
                 //確認用passwordが英数字になっているか？
-                if (!new Regex("^[0-9a-zA-Z]+$").IsMatch(PasswordConfirmationText.Text)) {
+                if (!new Regex("^[0-9a-zA-Z]+$").IsMatch(PasswordConfirmationText.Text.Trim())) {
                     PasswordConfirmationErrorMessageTextBlock.Text = "英数字で入力してください";
                     return;
                 }
 
                 //passwordが文字内に収まっているか？
-                if (PasswordText.Text.Length <= 5) {
+                if (PasswordText.Text.Trim().Length <= 5) {
                     PasswordErrorMessageTextBlock.Text = "パスワードは最低でも6文字以上にしてください";
                     return;
                 }
 
                 //確認用passwordが文字内に収まっているか？
-                if (PasswordConfirmationText.Text.Length <= 5) {
+                if (PasswordConfirmationText.Text.Trim().Length <= 5) {
                     PasswordConfirmationErrorMessageTextBlock.Text = "パスワードは最低でも6文字以上にしてください";
                     return;
                 }
 
                 //passwordと確認用passwordの内容が一致しない場合
-                if (!PasswordText.Text.Equals(PasswordConfirmationText.Text)) {
+                if (!PasswordText.Text.Trim().Equals(PasswordConfirmationText.Text.Trim())) {
                     PasswordErrorMessageTextBlock.Text = "パスワードと確認用パスワードの内容が一致しません";
                     return;
                 }
@@ -197,8 +197,8 @@ namespace GourmetSearchApplication {
                     //ログイン済みの場合
                     //DBにユーザー情報を変更する処理(既存レコードの変更)
                     DataRow drv = MainWindow.infosys202127DataSet.Members.Rows[MainWindow.infosys202127DataSet.Members.Select(x => x.MemberID).ToList().FindIndex(x => x == LoginInformation.MemberID)];
-                    drv[1] = ScreenInformation.registerPage.NameText.Text;
-                    drv[2] = ScreenInformation.registerPage.PasswordText.Text;
+                    drv[1] = ScreenInformation.registerPage.NameText.Text.Trim();
+                    drv[2] = ScreenInformation.registerPage.PasswordText.Text.Trim();
                     drv[3] = ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue;
                     drv[4] = ScreenInformation.registerPage.GenreComboBox.SelectedValue;
 
@@ -209,9 +209,9 @@ namespace GourmetSearchApplication {
 
                     //C#側の会員情報も更新する
                     //データベースからログイン情報をLoginInformationに登録
-                    LoginInformation.MemberID = ScreenInformation.registerPage.UserIdText.Text;
-                    LoginInformation.MemberName = ScreenInformation.registerPage.NameText.Text;
-                    LoginInformation.Password = ScreenInformation.registerPage.PasswordText.Text;
+                    LoginInformation.MemberID = ScreenInformation.registerPage.UserIdText.Text.Trim();
+                    LoginInformation.MemberName = ScreenInformation.registerPage.NameText.Text.Trim();
+                    LoginInformation.Password = ScreenInformation.registerPage.PasswordText.Text.Trim();
                     LoginInformation.PrefecturesID = int.Parse(ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue.ToString());
                     LoginInformation.GenreID = int.Parse(ScreenInformation.registerPage.GenreComboBox.SelectedValue.ToString());
 
@@ -222,9 +222,9 @@ namespace GourmetSearchApplication {
                     //まだログインしていない場合
                     //DBにユーザー情報を登録する処理(新規レコードの追加)
                     DataRow newDrv = (DataRow)MainWindow.infosys202127DataSet.Members.NewRow();
-                    newDrv[0] = ScreenInformation.registerPage.UserIdText.Text;
-                    newDrv[1] = ScreenInformation.registerPage.NameText.Text;
-                    newDrv[2] = ScreenInformation.registerPage.PasswordText.Text;
+                    newDrv[0] = ScreenInformation.registerPage.UserIdText.Text.Trim();
+                    newDrv[1] = ScreenInformation.registerPage.NameText.Text.Trim();
+                    newDrv[2] = ScreenInformation.registerPage.PasswordText.Text.Trim();
                     newDrv[3] = ScreenInformation.registerPage.PrefecturesComboBox.SelectedValue;
                     newDrv[4] = ScreenInformation.registerPage.GenreComboBox.SelectedValue;
                     //データセットに新しいレコードを追加
