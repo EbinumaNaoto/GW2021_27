@@ -157,6 +157,12 @@ namespace GourmetSearchApplication {
                     return;
                 }
 
+                //会員IDが英数字になっているか？
+                if (!new Regex("[0-9a-zA-Z]+$").IsMatch(UserIdText.Text)) {
+                    UserIdErrorMessageTextBlock.Text = "英数字で入力してください";
+                    return;
+                }
+
                 //passwordが英数字になっているか？
                 if (!new Regex("^[0-9a-zA-Z]+$").IsMatch(PasswordText.Text)) {
                     PasswordErrorMessageTextBlock.Text = "英数字で入力してください";
@@ -210,7 +216,7 @@ namespace GourmetSearchApplication {
                     LoginInformation.GenreID = int.Parse(ScreenInformation.registerPage.GenreComboBox.SelectedValue.ToString());
 
                     //LoginInfomationの情報をもとに表示
-                    ScreenInformation.searchPage.UserNameTextBlock.Text = LoginInformation.MemberName + " 様"; //ユーザー名表示
+                    ScreenInformation.searchPage.UserNameTextBlock.Text = LoginInformation.MemberName; //ユーザー名表示
 
                 } else {
                     //まだログインしていない場合
